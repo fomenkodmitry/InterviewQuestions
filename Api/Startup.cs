@@ -31,7 +31,6 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Autofac;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace Api
 {
@@ -110,9 +109,6 @@ namespace Api
                         }
                     });
             });
-         
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "../ClientApp/ClientApp/build"; });
             
             services
                 .AddControllers()
@@ -228,20 +224,7 @@ namespace Api
             app.UseHttpsRedirection();
             app.UseRouting();
 
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
-            
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "../ClientApp/ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
             
             UpdateDatabase(app);
             infrastructure.FileStorage();
