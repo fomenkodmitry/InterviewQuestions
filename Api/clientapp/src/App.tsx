@@ -8,9 +8,8 @@ function App() {
     return (
         <React.Fragment>
             <CssBaseline />
-            <Header/>             
+            <Header/>         
             <QuestionAnswer/>
-            
         </React.Fragment>
     );
 }

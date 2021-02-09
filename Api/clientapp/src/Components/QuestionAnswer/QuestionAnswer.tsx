@@ -7,12 +7,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Button, Card, CardActions, CardContent, CardMedia, Container, Grid} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '70%',
-    },
     heading: {
         fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
+        flexBasis: '66.66%',
+        flexShrink: 0,
     },
     icon: {
         marginRight: theme.spacing(2),
@@ -20,7 +18,11 @@ const useStyles = makeStyles((theme) => ({
     cardGrid: {
         paddingTop: theme.spacing(8),
         paddingBottom: theme.spacing(8),
-    }
+    },
+    secondaryHeading: {
+        fontSize: theme.typography.pxToRem(15),
+        color: theme.palette.text.secondary,
+    },
 }));
 
 export function QuestionAnswer() {
@@ -34,15 +36,16 @@ export function QuestionAnswer() {
                         <Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
+                                aria-controls="panel1bh-content"
+                                id="panel1bh-header"
                             >
-                                <Typography className={classes.heading}>Accordion 1</Typography>
+                                <Typography className={classes.heading}>General settins</Typography>
+                                <Typography className={classes.secondaryHeading}>Tags: NET</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget.
+                                    Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
+                                    maximus est, id dignissim quam.
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>
