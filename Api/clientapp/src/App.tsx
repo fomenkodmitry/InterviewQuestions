@@ -1,14 +1,18 @@
 import React from 'react';
 import './App.css';
-import './Components/Header/Header';
 import {Header} from "./Components/Header/Header";
+import {CssBaseline, Grid} from "@material-ui/core";
+import {QuestionAnswer} from "./Components/QuestionAnswer/QuestionAnswer";
 
 function App() {
-  return (
-    <div className="container">
-      <Header />
-    </div>
-  );
+    return (
+        <React.Fragment>
+            <CssBaseline />
+            <Header/>             
+            <QuestionAnswer/>
+            
+        </React.Fragment>
+    );
 }
 
 export default App;
