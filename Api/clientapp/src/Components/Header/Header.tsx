@@ -5,20 +5,19 @@ import Typography from '@material-ui/core/Typography';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import {FadeMenu} from "../Menu/FadeMenu";
 
-const useStyles = makeStyles((theme) => ({
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-    backgroundColorBar: {
-        background: '#323234'
-    }
-}));
-
 export function Header() {
 
+    const useStyles = makeStyles((theme) => ({
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+        },
+        backgroundColorBar: {
+            background: '#323234'
+        }
+    }));
     const classes = useStyles();
 
     return (

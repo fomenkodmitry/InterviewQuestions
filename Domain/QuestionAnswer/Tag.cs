@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Article
+namespace Domain.QuestionAnswer
 {
     [Flags]
     public enum Tag

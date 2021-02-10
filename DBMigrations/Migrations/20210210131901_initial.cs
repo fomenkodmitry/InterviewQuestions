@@ -3,31 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DBMigrations.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Articles",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProgrammingLanguage = table.Column<int>(type: "integer", nullable: false),
-                    Question = table.Column<string>(type: "text", nullable: true),
-                    Answer = table.Column<string>(type: "text", nullable: true),
-                    Tags = table.Column<int>(type: "integer", nullable: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
-                    IsDelete = table.Column<bool>(type: "boolean", nullable: false),
-                    DateDelete = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    DateUpdated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Articles", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Audits",
                 columns: table => new
@@ -70,6 +49,26 @@ namespace DBMigrations.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Files", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuestionAnswers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProgrammingLanguage = table.Column<int>(type: "integer", nullable: false),
+                    Question = table.Column<string>(type: "text", nullable: true),
+                    Answer = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsDelete = table.Column<bool>(type: "boolean", nullable: false),
+                    DateDelete = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DateUpdated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuestionAnswers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,18 +152,19 @@ namespace DBMigrations.Migrations
                 name: "IX_Tokens_UserId",
                 table: "Tokens",
                 column: "UserId");
+            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Articles");
-
-            migrationBuilder.DropTable(
                 name: "Audits");
 
             migrationBuilder.DropTable(
                 name: "Files");
+
+            migrationBuilder.DropTable(
+                name: "QuestionAnswers");
 
             migrationBuilder.DropTable(
                 name: "SrbacRolePermissions");

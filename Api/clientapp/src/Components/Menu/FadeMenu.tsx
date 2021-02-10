@@ -5,12 +5,6 @@ import Fade from '@material-ui/core/Fade';
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-    fade: {
-        color: '#FFFFFF'
-    }
-}));
-
 export function FadeMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -22,7 +16,12 @@ export function FadeMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    
+
+    const useStyles = makeStyles((theme) => ({
+        fade: {
+            color: '#FFFFFF'
+        }
+    }));
     const classes = useStyles();
     
     return (

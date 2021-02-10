@@ -31,6 +31,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Autofac;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
+using Domain.QuestionAnswer;
 
 namespace Api
 {
@@ -143,6 +144,7 @@ namespace Api
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
             builder.RegisterType<TokenService>().As<ITokenService>();
             builder.RegisterType<UserService>().As<IUserService>();
+            builder.RegisterType<QuestionAnswerService>().As<IQuestionAnswerService>();
 
             builder.RegisterType<SrbacService>().As<ISrbacService>().SingleInstance();
             builder.RegisterType<CryptoHelper>().SingleInstance();

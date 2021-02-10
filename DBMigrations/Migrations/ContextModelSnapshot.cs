@@ -19,47 +19,6 @@ namespace DBMigrations.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
-            modelBuilder.Entity("Domain.Article.ArticleModel", b =>
-                {
-                    b.Property<Guid?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Answer")
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DateDelete")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("ProgrammingLanguage")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Question")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Tags")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Articles");
-                });
-
             modelBuilder.Entity("Domain.Audit.AuditModel", b =>
                 {
                     b.Property<Guid?>("Id")
@@ -146,6 +105,44 @@ namespace DBMigrations.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Files");
+                });
+
+            modelBuilder.Entity("Domain.QuestionAnswer.QuestionAnswerModel", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DateDelete")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("ProgrammingLanguage")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Question")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuestionAnswers");
                 });
 
             modelBuilder.Entity("Domain.Srbac.SrbacRolePermissionModel", b =>

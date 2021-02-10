@@ -25,7 +25,7 @@ namespace Infrastructure.Contexts
                 .Build();
 
             optionsBuilder.UseNpgsql(
-                config.GetConnectionString("DefaultConnection"),
+                "User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=postgres;Pooling=true;",
                 x => x.MigrationsAssembly("DBMigrations")
             );
 

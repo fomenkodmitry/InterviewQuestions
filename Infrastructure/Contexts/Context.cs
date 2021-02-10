@@ -1,6 +1,6 @@
-﻿using Domain.Article;
-using Domain.Audit;
+﻿using Domain.Audit;
 using Domain.FileStorage;
+using Domain.QuestionAnswer;
 using Domain.Srbac;
 using Domain.Token;
 using Domain.User;
@@ -19,7 +19,7 @@ namespace Infrastructure.Contexts
         public DbSet<SrbacRolePermissionModel> SrbacRolePermissions { get; set; }
         public DbSet<AuditModel> Audits { get; set; }
         public DbSet<FileModel> Files { get; set; }
-        public DbSet<ArticleModel> Articles { get; set; }
+        public DbSet<QuestionAnswerModel> QuestionAnswers { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

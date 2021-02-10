@@ -1,56 +1,49 @@
-﻿import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {Button, Card, CardActions, CardContent, CardMedia, Container, Grid} from "@material-ui/core";
+﻿import {makeStyles} from '@material-ui/core/styles';
+import {Grid} from "@material-ui/core";
+import {Container} from "@material-ui/core";
+import {QuestionAnswerType} from "./QuestionAnswerType";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import {QuestionAnswerList} from "./QuestionAnswerList";
 
-const useStyles = makeStyles((theme) => ({
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        flexBasis: '66.66%',
-        flexShrink: 0,
-    },
-    icon: {
-        marginRight: theme.spacing(2),
-    },
-    cardGrid: {
-        paddingTop: theme.spacing(8),
-        paddingBottom: theme.spacing(8),
-    },
-    secondaryHeading: {
-        fontSize: theme.typography.pxToRem(15),
-        color: theme.palette.text.secondary,
-    },
-}));
+export type TQuestionAnswerTypeList = QuestionAnswerType[]
 
 export function QuestionAnswer() {
+    const useStyles = makeStyles((theme) => ({
+        cardGrid: {
+            paddingTop: theme.spacing(8),
+            paddingBottom: theme.spacing(8),
+            flexGrow: 1,
+            wordBreak: "break-all"
+        },
+        root: {
+            flexGrow: 1,
+        },
+        heading: {
+            fontSize: theme.typography.pxToRem(15),
+            flexBasis: '33.33%',
+            flexShrink: 0,
+        },
+        secondaryHeading: {
+            fontSize: theme.typography.pxToRem(15),
+            color: theme.palette.text.secondary,
+        },
+    }));
+    
     const classes = useStyles();
-    const cards = [1,2,3,4,5]
+    const [questionAnswers, setQuestionAnswerList] = useState<TQuestionAnswerTypeList>([]);
+
+    useEffect(() => {
+        // Use [] as second argument in useEffect for not rendering each time
+        axios.get<TQuestionAnswerTypeList>('https://localhost:5001/api/QuestionAnswer')
+            .then((response) => {
+                setQuestionAnswerList(response.data);
+            });
+    }, []);
     return (
-        <Container className={classes.cardGrid} maxWidth="md">
-            <Grid container spacing={2}>
-                {cards.map((card) => (
-                    <Grid item key={card} xs={12} sm={12} md={12}>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1bh-content"
-                                id="panel1bh-header"
-                            >
-                                <Typography className={classes.heading}>General settins</Typography>
-                                <Typography className={classes.secondaryHeading}>Tags: NET</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-                                    maximus est, id dignissim quam.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                    </Grid>
-                ))}
+        <Container className={classes.cardGrid}>
+            <Grid container>
+                <QuestionAnswerList items={questionAnswers}/>
             </Grid>
         </Container>
     );

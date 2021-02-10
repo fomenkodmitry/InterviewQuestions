@@ -1,4 +1,4 @@
-﻿namespace Domain.Article
+﻿namespace Domain.QuestionAnswer
 {
     public enum ProgrammingLanguage
     {
