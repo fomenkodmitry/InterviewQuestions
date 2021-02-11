@@ -4,3 +4,4 @@
     answer: string
 }
 
+export type QuestionAnswerTypeList = QuestionAnswerType[]
