@@ -2,7 +2,7 @@
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {useAppDispatch} from "../../Store/Store";
 import {fetchQuestionAnswer} from "../QuestionAnswer/QuestionAnswerThunk";
@@ -31,12 +31,15 @@ export function FadeMenu() {
     const getQuestions = (programmingLanguage: string) => {
         dispatch(fetchQuestionAnswer(programmingLanguage))
         handleClose()
+        setLanguage(programmingLanguage)
     };
-    
+    //хук состояния для локального хранения
+    const [language, setLanguage] = useState("All");
+
     return (
         <div>
             <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick} className={classes.fade}>
-                Select language
+                Selected language: {language}
             </Button>
             <Menu
                 id="fade-menu"
@@ -46,9 +49,9 @@ export function FadeMenu() {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-                <MenuItem onClick={() => getQuestions("Csharp")}>.NET</MenuItem>
-                <MenuItem onClick={() => getQuestions("Sql")}>SQL</MenuItem>
-                <MenuItem onClick={() => getQuestions("Nothing")}>All</MenuItem>
+                <MenuItem onClick={() => getQuestions("Csharp")}>CSharp</MenuItem>
+                <MenuItem onClick={() => getQuestions("Sql")}>Sql</MenuItem>
+                <MenuItem onClick={() => getQuestions("All")}>All</MenuItem>
             </Menu>
         </div>
     );

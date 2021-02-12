@@ -27,7 +27,7 @@ function QuestionAnswer(props : any) {
     };
     //заполняем стор первичными данными с помощью хука для сайд действий
     useEffect(() => {
-        getQuestions("Nothing")
+        getQuestions("All")
     }, []);
 
     return (

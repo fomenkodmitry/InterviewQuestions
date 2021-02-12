@@ -15,7 +15,7 @@ namespace Services.Implementations
 
         public IEnumerable<QuestionAnswerModel> Get(ProgrammingLanguage programmingLanguage)
         {
-            if(programmingLanguage != ProgrammingLanguage.Nothing)
+            if(programmingLanguage != ProgrammingLanguage.All)
                 return _genericRepository.Get<QuestionAnswerModel>(p => p.ProgrammingLanguage == programmingLanguage);
             
             return _genericRepository.Get<QuestionAnswerModel>(p => !p.IsDelete);
