@@ -6,6 +6,7 @@ import {questionAnswerReducer} from "../Reducer/QuestionAnswerReducer";
 import { combineReducers } from 'redux'
 
 const reducer = combineReducers({
+    //store for questionAnswers
     questionAnswers: questionAnswerReducer
 })
 

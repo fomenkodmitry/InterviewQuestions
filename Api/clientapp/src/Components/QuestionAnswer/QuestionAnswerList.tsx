@@ -15,7 +15,7 @@ export function QuestionAnswerList(props : QuestionAnswerListProps) {
     const useStyles = makeStyles((theme) => ({
         heading: {
             fontSize: theme.typography.pxToRem(15),
-            flexBasis: '66.66%',
+            flexBasis: '55.55%',
             flexShrink: 0,
         },
         secondaryHeading: {
@@ -37,7 +37,7 @@ export function QuestionAnswerList(props : QuestionAnswerListProps) {
                     <Accordion className={classes.accordionItem} >
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography className={classes.heading}>{item.question}</Typography>
-                            <Typography className={classes.secondaryHeading}>Tags: NET</Typography>
+                            <Typography className={classes.secondaryHeading}>Programming language: {item.programmingLanguage}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>{item.answer}</Typography>

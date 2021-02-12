@@ -2,6 +2,7 @@
     id: string
     question: string
     answer: string
+    programmingLanguage: string
 }
 
 export type QuestionAnswerTypeList = QuestionAnswerType[]

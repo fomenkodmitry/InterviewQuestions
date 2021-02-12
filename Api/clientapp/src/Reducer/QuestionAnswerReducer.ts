@@ -1,4 +1,4 @@
-﻿//Update store for Quest.Ans.
+﻿//Update store for QuestionAnswer
 import {
     createAction,
     createReducer,
@@ -12,6 +12,7 @@ export const questionAnswerReducer = createReducer(
     initialState,
     (builder) => {
         builder
+            //thunk action fulfilled for QuestionAnswer, update
             .addCase(fetchQuestionAnswer.fulfilled, (state, action) => {
                 state = action.payload
                 return state;

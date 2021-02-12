@@ -24,9 +24,9 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<QuestionAnswerModel>> Get()
+        public ActionResult<IEnumerable<QuestionAnswerModel>> Get(ProgrammingLanguage programmingLanguage)
         {
-            return Ok(_questionAnswerService.Get());
+            return Ok(_questionAnswerService.Get(programmingLanguage));
         }
     }
 }

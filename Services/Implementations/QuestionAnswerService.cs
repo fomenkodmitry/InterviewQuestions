@@ -13,8 +13,11 @@ namespace Services.Implementations
             _genericRepository = genericRepository;
         }
 
-        public IEnumerable<QuestionAnswerModel> Get()
+        public IEnumerable<QuestionAnswerModel> Get(ProgrammingLanguage programmingLanguage)
         {
+            if(programmingLanguage != ProgrammingLanguage.Nothing)
+                return _genericRepository.Get<QuestionAnswerModel>(p => p.ProgrammingLanguage == programmingLanguage);
+            
             return _genericRepository.Get<QuestionAnswerModel>(p => !p.IsDelete);
         }
     }

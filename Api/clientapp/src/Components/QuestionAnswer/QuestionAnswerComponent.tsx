@@ -25,10 +25,9 @@ function QuestionAnswer(props : any) {
     const getQuestions = (programmingLanguage: string) => {
         dispatch(fetchQuestionAnswer(programmingLanguage))
     };
-    
+    //fill store primary data
     useEffect(() => {
-        // Use [] as second argument in useEffect for not rendering each time
-        getQuestions("")
+        getQuestions("Nothing")
     }, []);
 
     return (

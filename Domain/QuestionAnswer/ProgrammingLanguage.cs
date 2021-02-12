@@ -2,7 +2,8 @@
 {
     public enum ProgrammingLanguage
     {
+        Nothing = 0,
         Csharp = 1,
-        Postgresql = 2,
+        Sql = 2,
     }
 }
