@@ -25,7 +25,7 @@ function QuestionAnswer(props : any) {
     const getQuestions = (programmingLanguage: string) => {
         dispatch(fetchQuestionAnswer(programmingLanguage))
     };
-    //заполняем стор первичными данными
+    //заполняем стор первичными данными с помощью хука для сайд действий
     useEffect(() => {
         getQuestions("Nothing")
     }, []);
