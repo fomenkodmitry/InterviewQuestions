@@ -8,7 +8,7 @@ import {useAppDispatch} from "../../Store/Store";
 import {connect} from "react-redux";
 import {QuestionAnswerTypeList} from "./QuestionAnswerType";
 
-//if export default, then not use brackets
+//если export default, то не нужно использовать скобки
 function QuestionAnswer(props : any) {
     const useStyles = makeStyles((theme) => ({
         cardGrid: {
@@ -25,7 +25,7 @@ function QuestionAnswer(props : any) {
     const getQuestions = (programmingLanguage: string) => {
         dispatch(fetchQuestionAnswer(programmingLanguage))
     };
-    //fill store primary data
+    //заполняем стор первичными данными
     useEffect(() => {
         getQuestions("Nothing")
     }, []);
@@ -42,5 +42,5 @@ function QuestionAnswer(props : any) {
 const mapStateToProps = (state: { questionAnswers: QuestionAnswerTypeList; }) => ({
     questionAnswers: state.questionAnswers
 })
-
+// подключение компонента к стору
 export default connect(mapStateToProps)(QuestionAnswer)

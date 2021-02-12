@@ -6,7 +6,7 @@ import {questionAnswerReducer} from "../Reducer/QuestionAnswerReducer";
 import { combineReducers } from 'redux'
 
 const reducer = combineReducers({
-    //store for questionAnswers
+    //стор для вопросов
     questionAnswers: questionAnswerReducer
 })
 
@@ -16,4 +16,4 @@ export const store = configureStore({
 })
 
 export type AppDispatch = typeof store.dispatch
-export const useAppDispatch = () => useDispatch<AppDispatch>() // Export a hook that can be reused to resolve types
+export const useAppDispatch = () => useDispatch<AppDispatch>()

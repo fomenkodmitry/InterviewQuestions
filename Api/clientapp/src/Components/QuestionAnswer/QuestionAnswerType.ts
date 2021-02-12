@@ -1,4 +1,5 @@
-﻿export interface QuestionAnswerType {
+﻿//типы
+export interface QuestionAnswerType {
     id: string
     question: string
     answer: string

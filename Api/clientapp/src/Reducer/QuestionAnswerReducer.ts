@@ -1,4 +1,4 @@
-﻿//Update store for QuestionAnswer
+﻿//обновляет стор для вопросов
 import {
     createAction,
     createReducer,
@@ -12,7 +12,7 @@ export const questionAnswerReducer = createReducer(
     initialState,
     (builder) => {
         builder
-            //thunk action fulfilled for QuestionAnswer, update
+            //санки action fulfilled для QuestionAnswer, и обновляет данные
             .addCase(fetchQuestionAnswer.fulfilled, (state, action) => {
                 state = action.payload
                 return state;
