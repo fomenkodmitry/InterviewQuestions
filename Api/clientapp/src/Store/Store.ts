@@ -7,7 +7,7 @@ import { combineReducers } from 'redux'
 
 const reducer = combineReducers({
     //стор для вопросов, нейминг должен быть как mapStateToProps и наоборот, 
-    //прокидывается редьюсер для обработки
+    //прокидывается редьюсер для обработки action сущностей стора
     questionAnswers: questionAnswerReducer
 })
 
