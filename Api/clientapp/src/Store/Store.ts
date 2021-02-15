@@ -6,7 +6,7 @@ import {questionAnswerReducer} from "../Reducer/QuestionAnswerReducer";
 import { combineReducers } from 'redux'
 
 const reducer = combineReducers({
-    //стор для вопросов
+    //стор для вопросов, нейминг должен быть как mapStateToProps и наоборот
     questionAnswers: questionAnswerReducer
 })
 
