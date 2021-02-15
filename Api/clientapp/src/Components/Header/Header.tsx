@@ -4,7 +4,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import {FadeMenu} from "../Menu/FadeMenu";
-import {Link} from "react-router-dom";
 import {useHistory} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 
@@ -22,15 +21,14 @@ export function Header() {
         }
     }));
     const classes = useStyles();
-    let query = new URLSearchParams(useLocation().search);
-    console.log(query)
 
     let history = useHistory();
-
     function home() {
         history.push("/");
     }
-    
+
+    const location = useLocation();
+
     return (
         <AppBar className={classes.backgroundColorBar} position="relative">
             <Toolbar>
@@ -38,7 +36,7 @@ export function Header() {
                 <Typography variant="h6" className={classes.title} onClick={home}>
                     Interview questions
                 </Typography>
-                <FadeMenu/>
+                {location.pathname == "/" && <FadeMenu/>}
             </Toolbar>
         </AppBar>
     );
