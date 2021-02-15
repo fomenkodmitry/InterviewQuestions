@@ -13,7 +13,7 @@ export function Pages() {
             </Route>
             <Route path="/question-create">
                 <Header/>
-                <QuestionCreate/>
+                <QuestionCreate initialValues={{hello: "fdasfasf"}}/>
             </Route>
         </Switch>
     )

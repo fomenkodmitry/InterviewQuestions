@@ -22,11 +22,12 @@ export function Header() {
     }));
     const classes = useStyles();
 
+    //истрия переходов + редирект
     let history = useHistory();
     function home() {
         history.push("/");
     }
-
+    // текущий путь
     const location = useLocation();
 
     return (

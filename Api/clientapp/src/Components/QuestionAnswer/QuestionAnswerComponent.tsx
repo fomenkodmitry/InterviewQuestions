@@ -1,7 +1,7 @@
 ﻿import {makeStyles} from '@material-ui/core/styles';
 import {Fab, Grid} from "@material-ui/core";
 import {Container} from "@material-ui/core";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {QuestionAnswerList} from "./QuestionAnswerList";
 import {fetchQuestionAnswer} from "./QuestionAnswerThunk";
 import {useAppDispatch} from "../../Store/Store";
@@ -37,7 +37,7 @@ function QuestionAnswer(props : any) {
         getQuestions("All")
     }, []);
 
-
+    //истрия переходов + редирект
     let history = useHistory();
     function create() {
         history.push("/question-create");
