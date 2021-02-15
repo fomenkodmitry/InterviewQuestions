@@ -1,8 +1,5 @@
 ﻿//обновляет стор для вопросов
-import {
-    createAction,
-    createReducer,
-} from '@reduxjs/toolkit'
+import {createReducer} from '@reduxjs/toolkit'
 import {QuestionAnswerTypeList} from "../Components/QuestionAnswer/QuestionAnswerType";
 import {fetchQuestionAnswer} from "../Components/QuestionAnswer/QuestionAnswerThunk";
 

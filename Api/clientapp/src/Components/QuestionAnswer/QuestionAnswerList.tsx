@@ -6,6 +6,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {QuestionAnswerTypeList} from "./QuestionAnswerType";
+import {useHistory} from "react-router-dom";
 
 interface QuestionAnswerListProps {
     items: QuestionAnswerTypeList
@@ -33,7 +34,7 @@ export function QuestionAnswerList(props : QuestionAnswerListProps) {
     return (
         <ul className={classes.ulElement}>
             {props.items.map(item => (
-                <Grid item xs={12}>
+                <Grid item xs={12} key={item.id} >
                     <Accordion className={classes.accordionItem} >
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography className={classes.heading}>{item.question}</Typography>
