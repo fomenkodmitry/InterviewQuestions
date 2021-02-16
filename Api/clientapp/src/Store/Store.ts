@@ -4,11 +4,13 @@ import logger from 'redux-logger'
 import {useDispatch} from "react-redux";
 import {questionAnswerReducer} from "../Reducer/QuestionAnswerReducer";
 import { combineReducers } from 'redux'
+import {programmingLanguageReducer} from "../Reducer/ProgrammingLanguageReducer";
 
 const reducer = combineReducers({
     //стор для вопросов, нейминг должен быть как mapStateToProps и наоборот, 
     //прокидывается редьюсер для обработки action сущностей стора
-    questionAnswers: questionAnswerReducer
+    questionAnswers: questionAnswerReducer,
+    programmingLanguages: programmingLanguageReducer
 })
 
 export const store = configureStore({

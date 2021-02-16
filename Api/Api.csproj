@@ -45,6 +45,7 @@
 
     <ItemGroup>
       <Folder Include="ClientApp" />
+      <Folder Include="clientapp\src\Components\ProgrammingLanguage" />
     </ItemGroup>
 
 </Project>

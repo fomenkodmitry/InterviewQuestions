@@ -24,9 +24,9 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<QuestionAnswerModel>> Get(ProgrammingLanguage programmingLanguage)
+        public ActionResult<IEnumerable<QuestionAnswerModel>> Get([FromQuery] QuestionAnswerFilter filter)
         {
-            return Ok(_questionAnswerService.Get(programmingLanguage));
+            return Ok(_questionAnswerService.Get(filter));
         }
     }
 }

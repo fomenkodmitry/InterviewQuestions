@@ -5,14 +5,9 @@ import Typography from "@material-ui/core/Typography";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {QuestionAnswerTypeList} from "./QuestionAnswerType";
-import {useHistory} from "react-router-dom";
+import {QuestionAnswerListProps} from "../../Type/QuestionAnswerType";
 
-interface QuestionAnswerListProps {
-    items: QuestionAnswerTypeList
-}
-
-export function QuestionAnswerList(props : QuestionAnswerListProps) {
+export function QuestionAnswerList(props: QuestionAnswerListProps) {
     const useStyles = makeStyles((theme) => ({
         heading: {
             fontSize: theme.typography.pxToRem(15),
@@ -31,14 +26,16 @@ export function QuestionAnswerList(props : QuestionAnswerListProps) {
         }
     }));
     const classes = useStyles();
+    
     return (
         <ul className={classes.ulElement}>
-            {props.items.map(item => (
-                <Grid item xs={12} key={item.id} >
-                    <Accordion className={classes.accordionItem} >
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            {props?.questionAnswers?.map(item => (
+                <Grid item xs={12} key={item.id}>
+                    <Accordion className={classes.accordionItem}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography className={classes.heading}>{item.question}</Typography>
-                            <Typography className={classes.secondaryHeading}>Programming language: {item.programmingLanguage}</Typography>
+                            <Typography className={classes.secondaryHeading}>Programming
+                                language: {props.programmingLanguages?.find(p => p.id == item.programmingLanguageId)?.name}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>{item.answer}</Typography>

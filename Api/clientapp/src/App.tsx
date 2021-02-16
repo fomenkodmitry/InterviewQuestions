@@ -5,12 +5,15 @@ import {CssBaseline, Grid} from "@material-ui/core";
 import {Provider} from "react-redux";
 import {store} from "./Store/Store";
 import {Pages} from "./Components/Route/Pages";
+import {Header} from "./Components/Header/Header";
+import {Route} from "react-router-dom";
 
 function App() {
     return (
         <Provider store={store}>
             <React.Fragment>
                 <CssBaseline/>
+                <Header/>
                 <Pages/>
             </React.Fragment>
         </Provider>

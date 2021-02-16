@@ -1,5 +1,6 @@
 ﻿using Domain.Audit;
 using Domain.FileStorage;
+using Domain.ProgrammingLanguage;
 using Domain.QuestionAnswer;
 using Domain.Srbac;
 using Domain.Token;
@@ -20,6 +21,7 @@ namespace Infrastructure.Contexts
         public DbSet<AuditModel> Audits { get; set; }
         public DbSet<FileModel> Files { get; set; }
         public DbSet<QuestionAnswerModel> QuestionAnswers { get; set; }
+        public DbSet<ProgrammingLanguageModel> ProgrammingLanguages { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

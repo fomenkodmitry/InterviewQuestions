@@ -5,9 +5,14 @@ import Fade from '@material-ui/core/Fade';
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {useAppDispatch} from "../../Store/Store";
-import {fetchQuestionAnswer} from "../QuestionAnswer/QuestionAnswerThunk";
+import {fetchProgrammingLanguage} from "../../Thunk/ProgrammingLanguageThunk";
+import {fetchQuestionAnswer} from "../../Thunk/QuestionAnswerThunk";
+import {connect} from "react-redux";
+import {ProgrammingLanguageListProps, ProgrammingLanguageTypeList} from "../../Type/ProgrammingLanguageType";
+import {QuestionAnswerTypeList} from "../../Type/QuestionAnswerType";
 
-export function FadeMenu() {
+function FadeMenu(props: ProgrammingLanguageListProps) {
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -25,17 +30,28 @@ export function FadeMenu() {
         }
     }));
     const classes = useStyles();
-    
-    //update store onlick
-    const dispatch = useAppDispatch()
-    const getQuestions = (programmingLanguage: string) => {
-        dispatch(fetchQuestionAnswer(programmingLanguage))
-        handleClose()
-        setLanguage(programmingLanguage)
-    };
-    //хук состояния для локального хранения
-    const [language, setLanguage] = useState("All");
 
+    const dispatch = useAppDispatch()
+
+    //update store onlick
+    const getQuestions = (programmingLanguageId?: string) => {
+        dispatch(fetchQuestionAnswer(programmingLanguageId))
+        handleClose()
+        let lang = programmingLanguageId ? props.programmingLanguages?.find(p => p.id == programmingLanguageId)?.name : "All"
+        setLanguage(lang)
+    };
+
+    const getLanguages = () => {
+        dispatch(fetchProgrammingLanguage())
+    };
+
+    useEffect(() => {
+        getLanguages()
+    }, [])
+
+    //хук состояния для локального хранения
+    const [language, setLanguage] = useState<string | undefined>("All");
+    console.log(props)
     return (
         <div>
             <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick} className={classes.fade}>
@@ -49,10 +65,19 @@ export function FadeMenu() {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-                <MenuItem onClick={() => getQuestions("Csharp")}>CSharp</MenuItem>
-                <MenuItem onClick={() => getQuestions("Sql")}>Sql</MenuItem>
-                <MenuItem onClick={() => getQuestions("All")}>All</MenuItem>
+                {props?.programmingLanguages?.map(item => (
+                    <MenuItem id={item.id} onClick={() => getQuestions(item.id)}>{item.name}</MenuItem>
+                ))}
+                <MenuItem onClick={() => getQuestions()}>All</MenuItem>
             </Menu>
         </div>
     );
 }
+//можно получать уже готовые стейты
+const mapStateToProps = (state: { programmingLanguages: ProgrammingLanguageTypeList; questionAnswers: QuestionAnswerTypeList }) => ({
+    programmingLanguages: state.programmingLanguages,
+    questionAnswers: state.questionAnswers
+})
+
+// подключение компонента к стору
+export default connect(mapStateToProps)(FadeMenu)

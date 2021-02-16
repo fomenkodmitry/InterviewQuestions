@@ -1,7 +1,7 @@
 ﻿//обновляет стор для вопросов
 import {createReducer} from '@reduxjs/toolkit'
-import {QuestionAnswerTypeList} from "../Components/QuestionAnswer/QuestionAnswerType";
-import {fetchQuestionAnswer} from "../Components/QuestionAnswer/QuestionAnswerThunk";
+import {QuestionAnswerTypeList} from "../Type/QuestionAnswerType";
+import {fetchQuestionAnswer} from "../Thunk/QuestionAnswerThunk";
 
 const initialState : QuestionAnswerTypeList = []
 

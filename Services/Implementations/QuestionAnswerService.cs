@@ -13,10 +13,10 @@ namespace Services.Implementations
             _genericRepository = genericRepository;
         }
 
-        public IEnumerable<QuestionAnswerModel> Get(ProgrammingLanguage programmingLanguage)
+        public IEnumerable<QuestionAnswerModel> Get(QuestionAnswerFilter filter)
         {
-            if(programmingLanguage != ProgrammingLanguage.All)
-                return _genericRepository.Get<QuestionAnswerModel>(p => p.ProgrammingLanguage == programmingLanguage);
+            if(filter.ProgrammingLanguageId.HasValue)
+                return _genericRepository.Get<QuestionAnswerModel>(p => p.ProgrammingLanguageId == filter.ProgrammingLanguageId);
             
             return _genericRepository.Get<QuestionAnswerModel>(p => !p.IsDelete);
         }

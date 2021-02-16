@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import {FadeMenu} from "../Menu/FadeMenu";
+import FadeMenu from "../Menu/FadeMenu";
 import {useHistory} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 
@@ -24,9 +24,11 @@ export function Header() {
 
     //истрия переходов + редирект
     let history = useHistory();
+
     function home() {
         history.push("/");
     }
+
     // текущий путь
     const location = useLocation();
 
