@@ -19,6 +19,7 @@ import {
 // Picker
 import DateFnsUtils from '@date-io/date-fns';
 import {makeStyles} from "@material-ui/core/styles";
+import {ReactElement} from "react";
 
 const onSubmit = async (values: any) => {
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -42,7 +43,7 @@ const validate = (values: { firstName: any; lastName: any; email: any; }) => {
 
 interface Fields {
     size: GridSize,
-    field: any
+    field: ReactElement
 }
 
 type FieldsList = Fields[]
