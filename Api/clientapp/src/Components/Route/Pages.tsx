@@ -10,7 +10,7 @@ export function Pages() {
                 <QuestionAnswer/>
             </Route>
             <Route path="/question-create">
-                <QuestionCreate initialValues={{hello: "jpeg"}}/>
+                <QuestionCreate/>
             </Route>
         </Switch>
     )

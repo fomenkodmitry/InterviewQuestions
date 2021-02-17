@@ -4,7 +4,6 @@ using System.Transactions;
 using Domain.Authenticate;
 using Domain.Base;
 using Domain.Error;
-using Domain.Filter;
 using Domain.Token;
 using Domain.User;
 using Infrastructure.Crypto;
