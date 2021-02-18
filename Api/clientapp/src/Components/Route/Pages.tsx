@@ -1,5 +1,5 @@
 ﻿import {Route, Switch} from "react-router-dom";
-import {QuestionCreate} from "../QuestionAnswer/Create/QuestionCreate";
+import QuestionCreate from "../QuestionAnswer/Create/QuestionCreate";
 import React from "react";
 import QuestionAnswer from "../QuestionAnswer/QuestionAnswer";
 

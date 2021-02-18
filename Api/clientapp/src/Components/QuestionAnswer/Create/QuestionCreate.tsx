@@ -1,42 +1,35 @@
 ﻿import {Form} from 'react-final-form';
 import {
     TextField,
-    Checkboxes,
-    Radios,
     Select,
-    DatePicker,
-    TimePicker,
 } from 'mui-rff';
 import {
-    Typography,
     Paper,
-    Link,
     Grid,
     Button,
-    CssBaseline,
     MenuItem, GridSize,
 } from '@material-ui/core';
-// Picker
-import DateFnsUtils from '@date-io/date-fns';
+
 import {makeStyles} from "@material-ui/core/styles";
-import {ReactElement} from "react";
+import {ReactElement, useEffect} from "react";
+import {createQuestionThunk} from "../../../Thunk/CreateQuestionThunk";
+import {useAppDispatch} from "../../../Store/Store";
+import {QuestionCreateType} from "../../../Type/QuestionAnswerType";
+import {connect} from "react-redux";
+import {ProgrammingLanguageProps} from "../../../Type/Props";
+import {fetchProgrammingLanguageThunk} from "../../../Thunk/ProgrammingLanguageThunk";
 
-const onSubmit = async (values: any) => {
-    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    await sleep(300);
-    window.alert(JSON.stringify(values));
-};
 
-const validate = (values: { firstName: any; lastName: any; email: any; }) => {
+const validate = (values: QuestionCreateType) => {
     const errors: any = {};
-    if (!values.firstName) {
-        errors.firstName = 'Required';
+    if (!values.question) {
+        errors.question = 'Required';
     }
-    if (!values.lastName) {
-        errors.lastName = 'Required';
+    if (!values.answer) {
+        errors.answer = 'Required';
     }
-    if (!values.email) {
-        errors.email = 'Required';
+    if (!values.programmingLanguageId) {
+        errors.programmingLanguageId = 'Required';
     }
     return errors;
 };
@@ -48,33 +41,31 @@ interface Fields {
 
 type FieldsList = Fields[]
 
-const formFields: FieldsList = [
-    {
-        size: 12,
-        field: <TextField name="question" multiline label="Question" margin="none"/>,
-    },
-    {
-        size: 12,
-        field: <TextField name="answer" multiline label="Answer" margin="none"/>,
-    },
-    {
-        size: 12,
-        field: (
-            <Select
-                name="Programming language"
-                label="Select a language"
-                formControlProps={{margin: 'none'}}
-            >
-                <MenuItem value="London">London</MenuItem>
-                <MenuItem value="Paris">Paris</MenuItem>
-                <MenuItem value="Budapest">A city with a very long Name</MenuItem>
-            </Select>
-        ),
-    },
-];
+function QuestionCreate(props : ProgrammingLanguageProps) {
 
-export function QuestionCreate() {
-
+    const formFields: FieldsList = [
+        {
+            size: 12,
+            field: <TextField name="question" multiline label="Question" margin="none"/>,
+        },
+        {
+            size: 12,
+            field: <TextField name="answer" multiline label="Answer" margin="none"/>,
+        },
+        {
+            size: 12,
+            field: (
+                <Select
+                    name="programmingLanguageId"
+                    label="Select a language"
+                    formControlProps={{margin: 'none'}}
+                >
+                    {props?.programmingLanguages?.map(item => (<MenuItem value={item.id}>{item.name}</MenuItem>))}
+                </Select>
+            ),
+        },
+    ];
+    
     const useStyles = makeStyles((theme) => ({
         Form: {
             padding: 16,
@@ -85,11 +76,25 @@ export function QuestionCreate() {
     }));
 
     const classes = useStyles();
+
+    const dispatch = useAppDispatch()
+
+    const createQuestion = (value : QuestionCreateType) => {
+        dispatch(createQuestionThunk(value)).then(() => alert("success"))
+    };
+    const getLanguages = () => {
+        dispatch(fetchProgrammingLanguageThunk())
+    };
+
+    useEffect(() => {
+        getLanguages()
+    }, [])
+    
     return (
         <div className={classes.Form}>
             <Form
-                onSubmit={onSubmit}
-                initialValues={{employed: true, stooge: 'larry'}}
+                onSubmit={createQuestion}
+                initialValues={{}}
                 validate={validate}
                 render={({handleSubmit, form, submitting, pristine, values}) => (
                     <form onSubmit={handleSubmit} noValidate>
@@ -100,6 +105,16 @@ export function QuestionCreate() {
                                         {item.field}
                                     </Grid>
                                 ))}
+                                <Grid item style={{ marginTop: 16 }}>
+                                    <Button
+                                        type="button"
+                                        variant="contained"
+                                        onClick={() => form.reset()}
+                                        disabled={submitting || pristine}
+                                    >
+                                        Reset
+                                    </Button>
+                                </Grid>
                                 <Grid item style={{marginTop: 16}}>
                                     <Button
                                         variant="contained"
@@ -112,10 +127,16 @@ export function QuestionCreate() {
                                 </Grid>
                             </Grid>
                         </Paper>
-                        <pre>{JSON.stringify(values)}</pre>
                     </form>
                 )}
-            />
+             />
         </div>
     );
 }
+
+const mapStateToProps = (state: ProgrammingLanguageProps) => ({
+    programmingLanguages: state.programmingLanguages,
+})
+
+// подключение компонента к стору
+export default connect(mapStateToProps)(QuestionCreate)

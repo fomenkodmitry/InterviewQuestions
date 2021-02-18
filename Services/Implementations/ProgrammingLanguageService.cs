@@ -15,7 +15,7 @@ namespace Services.Implementations
 
         public IEnumerable<ProgrammingLanguageModel> Get()
         {
-            return _genericRepository.Get<ProgrammingLanguageModel>(p => !p.IsDelete);
+            return _genericRepository.Get<ProgrammingLanguageModel>();
         }
     }
 }

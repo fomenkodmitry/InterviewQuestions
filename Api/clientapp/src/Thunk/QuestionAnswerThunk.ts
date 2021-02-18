@@ -1,7 +1,7 @@
 ﻿import { createAsyncThunk } from '@reduxjs/toolkit'
 import {QuestionAnswerTypeList} from "../Type/QuestionAnswerType";
 //просто запрос асинхронный
-export const fetchQuestionAnswer = createAsyncThunk(
+export const fetchQuestionAnswerThunk = createAsyncThunk(
     'QuestionAnswer',
     async (programmingLanguageId? : string) => {
         let response;

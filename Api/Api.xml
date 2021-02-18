@@ -1,8 +1,150 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <doc>
     <assembly>
         <name>Api</name>
     </assembly>
     <members>
+        <member name="T:Api.Controllers.AuthController">
+            <summary>
+            Login user
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.AuthController.#ctor(Domain.Authenticate.IAuthenticationService,Domain.User.IUserService)">
+            <summary>
+            DI ctor
+            </summary>
+            <param name="authenticateService"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Api.Controllers.AuthController.Login(Domain.Authenticate.UserLoginRequestDto,System.String,System.String)">
+            <summary>
+            User login
+            </summary>
+            <param name="requestDto" class="UserLoginRequestDto"></param>
+            <param name="userAgent">Header - User-Agent</param>
+            <param name="appVersion">Header - X-Application-Version</param>
+            <returns class="UserLoginResponseDto">UserLoginResponseDto</returns>
+        </member>
+        <member name="M:Api.Controllers.AuthController.Registration(Domain.Authenticate.UserRegistrationRequestDto,System.String,System.String)">
+            <summary>
+            User registration
+            </summary>
+            <param name="requestDto">Reg user data</param>
+            <param name="userAgent">Header - User-Agent</param>
+            <param name="appVersion">Header - X-Application-Version</param>
+            <returns class = "UserRegistrationResponseDto">UserRegistrationResponseDto</returns>
+        </member>
+        <member name="M:Api.Controllers.AuthController.Logout">
+            <summary>
+            Logout
+            </summary>
+            <returns>200 OK</returns>
+        </member>
+        <member name="T:Api.Controllers.Base.BaseApiController`2">
+            <summary>
+            Base Api class
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TFilter"></typeparam>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.#ctor(Domain.User.IUserService,AutoMapper.IMapper)">
+            <summary>
+            DI ctor
+            </summary>
+            <param name="userService"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.Get(`1)">
+            <summary>
+            Return all entities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.Get(System.Guid)">
+            <summary>
+            Return entity by id
+            </summary>
+            <param name="id">Id entity</param>
+            <returns>Model entity</returns>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.Post(`0)">
+            <summary>
+            Create entity
+            </summary>
+            <param name="model">Description new entity</param>
+            <returns>Model created entity</returns>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.Put(`0)">
+            <summary>
+            Edit entity
+            </summary>
+            <param name="model">Model with edit fields</param>
+            <returns>Model edited entity</returns>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.Delete(System.Guid)">
+            <summary>
+            Delete entity by Id
+            </summary>
+            <param name="id">Id entity</param>
+            <returns>Model deleted entity</returns>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.BadRequest(Domain.Error.ErrorCodes,System.String[])">
+            <summary>
+            Response for bad request
+            </summary>
+            <param name="code">Error code</param>
+            <param name="property">Field(optional)</param>
+            <returns>BadRequest, text error</returns>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.ProcessResult(Domain.Base.ResultContainer{`0})">
+            <summary>
+            Response
+            </summary>
+            <param name="result">Result</param>
+            <returns>Container With result</returns>
+        </member>
+        <member name="M:Api.Controllers.Base.BaseApiController`2.ProcessResult``1(Domain.Base.ResultContainer{``0})">
+            <summary>
+            Response
+            </summary>
+            <param name="result">Result</param>
+            <returns>Container With result</returns>
+        </member>
+        <member name="M:Api.Controllers.ProgrammingLanguageController.Get">
+            <summary>
+            Get pl data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.QuestionAnswerController.Get(Domain.QuestionAnswer.QuestionAnswerFilter)">
+            <summary>
+            Get question data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.QuestionAnswerController.Create(Domain.QuestionAnswer.QuestionAnswerModel)">
+            <summary>
+            Create question
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Api.Controllers.UserController">
+            <summary>
+            Users
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UserController.#ctor(AutoMapper.IMapper,Domain.User.IUserService)">
+            <summary>
+            DI
+            </summary>
+            <param name="mapper"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Api.Controllers.UserController.Self">
+            <summary>
+            Get current user data
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

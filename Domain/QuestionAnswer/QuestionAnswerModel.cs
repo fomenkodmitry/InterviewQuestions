@@ -10,9 +10,12 @@ namespace Domain.QuestionAnswer
     {
         [JsonIgnore]
         public ProgrammingLanguageModel ProgrammingLanguage { get; set; }
+        [Required]
         public Guid ProgrammingLanguageId { get; set; }
         [MaxLength(255)]
+        [Required]
         public string Question { get; set; }
+        [Required]
         public string Answer { get; set; }
     }
 }

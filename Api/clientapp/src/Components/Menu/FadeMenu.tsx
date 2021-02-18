@@ -5,13 +5,12 @@ import Fade from '@material-ui/core/Fade';
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {useAppDispatch} from "../../Store/Store";
-import {fetchProgrammingLanguage} from "../../Thunk/ProgrammingLanguageThunk";
-import {fetchQuestionAnswer} from "../../Thunk/QuestionAnswerThunk";
+import {fetchProgrammingLanguageThunk} from "../../Thunk/ProgrammingLanguageThunk";
+import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
 import {connect} from "react-redux";
-import {ProgrammingLanguageListProps, ProgrammingLanguageTypeList} from "../../Type/ProgrammingLanguageType";
-import {QuestionAnswerTypeList} from "../../Type/QuestionAnswerType";
+import {QuestionAndProgrammingProps} from "../../Type/Props";
 
-function FadeMenu(props: ProgrammingLanguageListProps) {
+function FadeMenu(props: QuestionAndProgrammingProps) {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -35,14 +34,14 @@ function FadeMenu(props: ProgrammingLanguageListProps) {
 
     //update store onlick
     const getQuestions = (programmingLanguageId?: string) => {
-        dispatch(fetchQuestionAnswer(programmingLanguageId))
+        dispatch(fetchQuestionAnswerThunk(programmingLanguageId))
         handleClose()
         let lang = programmingLanguageId ? props.programmingLanguages?.find(p => p.id == programmingLanguageId)?.name : "All"
         setLanguage(lang)
     };
 
     const getLanguages = () => {
-        dispatch(fetchProgrammingLanguage())
+        dispatch(fetchProgrammingLanguageThunk())
     };
 
     useEffect(() => {
@@ -74,7 +73,7 @@ function FadeMenu(props: ProgrammingLanguageListProps) {
     );
 }
 //можно получать уже готовые стейты
-const mapStateToProps = (state: { programmingLanguages: ProgrammingLanguageTypeList; questionAnswers: QuestionAnswerTypeList }) => ({
+const mapStateToProps = (state: QuestionAndProgrammingProps) => ({
     programmingLanguages: state.programmingLanguages,
     questionAnswers: state.questionAnswers
 })

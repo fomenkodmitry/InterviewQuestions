@@ -4,6 +4,10 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>Api.xml</DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="Autofac" Version="6.1.0" />
       <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
@@ -45,7 +49,6 @@
 
     <ItemGroup>
       <Folder Include="ClientApp" />
-      <Folder Include="clientapp\src\Components\ProgrammingLanguage" />
     </ItemGroup>
 
 </Project>

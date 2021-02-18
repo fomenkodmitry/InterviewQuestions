@@ -1,6 +1,6 @@
 ﻿import {createReducer} from '@reduxjs/toolkit'
 import {ProgrammingLanguageTypeList} from "../Type/ProgrammingLanguageType";
-import {fetchProgrammingLanguage} from "../Thunk/ProgrammingLanguageThunk";
+import {fetchProgrammingLanguageThunk} from "../Thunk/ProgrammingLanguageThunk";
 
 const initialState : ProgrammingLanguageTypeList = []
 
@@ -9,7 +9,7 @@ export const programmingLanguageReducer = createReducer(
     (builder) => {
         builder
             //санки action fulfilled для PL, и обновляет данные
-            .addCase(fetchProgrammingLanguage.fulfilled, (state, action) => {
+            .addCase(fetchProgrammingLanguageThunk.fulfilled, (state, action) => {
                 state = action.payload
                 return state;
             })

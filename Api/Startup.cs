@@ -121,7 +121,9 @@ namespace Api
         {
             var dbContextOptionsBuilder =
                 new DbContextOptionsBuilder<Context>().UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection"));
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    x => x.MigrationsAssembly("DBMigrations")
+                );
             builder
                 .RegisterType<Context>()
                 .WithParameter("options", dbContextOptionsBuilder.Options)

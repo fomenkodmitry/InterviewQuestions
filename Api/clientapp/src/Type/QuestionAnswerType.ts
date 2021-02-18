@@ -1,6 +1,4 @@
 ﻿//типы
-import {ProgrammingLanguageTypeList} from "./ProgrammingLanguageType";
-
 export interface QuestionAnswerType {
     id: string
     question: string
@@ -10,7 +8,10 @@ export interface QuestionAnswerType {
 
 export type QuestionAnswerTypeList = QuestionAnswerType[]
 
-export interface QuestionAnswerListProps {
-    programmingLanguages?: ProgrammingLanguageTypeList
-    questionAnswers?: QuestionAnswerTypeList
+
+export interface QuestionCreateType
+{
+    question: string
+    answer: string
+    programmingLanguageId: string
 }

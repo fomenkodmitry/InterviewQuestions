@@ -4,15 +4,14 @@ import {Container} from "@material-ui/core";
 import React, {useEffect} from "react";
 import {QuestionAnswerList} from "./QuestionAnswerList";
 import {useAppDispatch} from "../../Store/Store";
-import {connect, ConnectedProps} from "react-redux";
+import {connect} from "react-redux";
 import AddIcon from '@material-ui/icons/Add';
 import {useHistory} from "react-router-dom";
-import {QuestionAnswerListProps, QuestionAnswerTypeList} from "../../Type/QuestionAnswerType";
-import {fetchQuestionAnswer} from "../../Thunk/QuestionAnswerThunk";
-import {ProgrammingLanguageListProps, ProgrammingLanguageTypeList} from "../../Type/ProgrammingLanguageType";
+import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
+import {QuestionAndProgrammingProps} from "../../Type/Props";
 
 //если export default, то не нужно использовать скобки
-function QuestionAnswer(props: QuestionAnswerListProps) {
+function QuestionAnswer(props: QuestionAndProgrammingProps) {
     const useStyles = makeStyles((theme) => ({
         cardGrid: {
             paddingTop: theme.spacing(8),
@@ -31,7 +30,7 @@ function QuestionAnswer(props: QuestionAnswerListProps) {
     const dispatch = useAppDispatch()
 
     const getQuestions = (programmingLanguage?: string) => {
-        dispatch(fetchQuestionAnswer(programmingLanguage))
+        dispatch(fetchQuestionAnswerThunk(programmingLanguage))
     };
     //заполняем стор первичными данными с помощью хука для сайд действий
     useEffect(() => {
@@ -59,7 +58,7 @@ function QuestionAnswer(props: QuestionAnswerListProps) {
 
 
 //можно получать уже готовые стейты
-const mapStateToProps = (state: { programmingLanguages: ProgrammingLanguageTypeList; questionAnswers: QuestionAnswerTypeList }) => ({
+const mapStateToProps = (state: QuestionAndProgrammingProps) => ({
     programmingLanguages: state.programmingLanguages,
     questionAnswers: state.questionAnswers
 })
