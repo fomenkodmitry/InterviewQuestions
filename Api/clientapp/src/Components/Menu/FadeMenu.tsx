@@ -8,9 +8,11 @@ import {useAppDispatch} from "../../Store/Store";
 import {fetchProgrammingLanguageThunk} from "../../Thunk/ProgrammingLanguageThunk";
 import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
 import {connect} from "react-redux";
-import {QuestionAndProgrammingProps} from "../../Type/Props";
+import {StoreProps} from "../../Type/Props";
+import {QuestionFilterType} from "../../Type/QuestionAnswerType";
+import {changeProgrammingLanguageIdAction} from "../../Reducer/ValueReducer";
 
-function FadeMenu(props: QuestionAndProgrammingProps) {
+function FadeMenu(props: StoreProps) {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -33,11 +35,10 @@ function FadeMenu(props: QuestionAndProgrammingProps) {
     const dispatch = useAppDispatch()
 
     //update store onlick
-    const getQuestions = (programmingLanguageId?: string) => {
-        dispatch(fetchQuestionAnswerThunk(programmingLanguageId))
+    const getQuestions = (filter? : QuestionFilterType) => {
+        dispatch(fetchQuestionAnswerThunk(filter))
         handleClose()
-        let lang = programmingLanguageId ? props.programmingLanguages?.find(p => p.id == programmingLanguageId)?.name : "All"
-        setLanguage(lang)
+        dispatch(changeProgrammingLanguageIdAction(filter?.programmingLanguageId))
     };
 
     const getLanguages = () => {
@@ -47,14 +48,12 @@ function FadeMenu(props: QuestionAndProgrammingProps) {
     useEffect(() => {
         getLanguages()
     }, [])
-
-    //хук состояния для локального хранения
-    const [language, setLanguage] = useState<string | undefined>("All");
-    console.log(props)
+    
+    let filter : QuestionFilterType = {}
     return (
         <div>
             <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick} className={classes.fade}>
-                Selected language: {language}
+                Selected language: {props.programmingLanguages?.find(p => p.id == props.values?.programmingLanguageId)?.name ?? "All"}
             </Button>
             <Menu
                 id="fade-menu"
@@ -65,17 +64,22 @@ function FadeMenu(props: QuestionAndProgrammingProps) {
                 TransitionComponent={Fade}
             >
                 {props?.programmingLanguages?.map(item => (
-                    <MenuItem id={item.id} onClick={() => getQuestions(item.id)}>{item.name}</MenuItem>
+                    <MenuItem key={item.id} onClick={() =>{
+                        filter.programmingLanguageId = item.id
+                        filter.searchText = props.values?.searchText
+                        getQuestions(filter)  
+                    } }>{item.name}</MenuItem>
                 ))}
-                <MenuItem onClick={() => getQuestions()}>All</MenuItem>
+                <MenuItem key={"all"} onClick={() => getQuestions()}>All</MenuItem>
             </Menu>
         </div>
     );
 }
 //можно получать уже готовые стейты
-const mapStateToProps = (state: QuestionAndProgrammingProps) => ({
+const mapStateToProps = (state: StoreProps) => ({
     programmingLanguages: state.programmingLanguages,
-    questionAnswers: state.questionAnswers
+    questionAnswers: state.questionAnswers,
+    values : state.values
 })
 
 // подключение компонента к стору

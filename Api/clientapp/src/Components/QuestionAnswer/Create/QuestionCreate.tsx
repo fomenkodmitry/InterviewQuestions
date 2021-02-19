@@ -7,18 +7,18 @@ import {
     Paper,
     Grid,
     Button,
-    MenuItem, GridSize,
+    MenuItem, GridSize, Snackbar,
 } from '@material-ui/core';
 
 import {makeStyles} from "@material-ui/core/styles";
-import {ReactElement, useEffect} from "react";
+import React, {ReactElement, useEffect} from "react";
 import {createQuestionThunk} from "../../../Thunk/CreateQuestionThunk";
 import {useAppDispatch} from "../../../Store/Store";
 import {QuestionCreateType} from "../../../Type/QuestionAnswerType";
 import {connect} from "react-redux";
-import {ProgrammingLanguageProps} from "../../../Type/Props";
+import {StoreProps} from "../../../Type/Props";
 import {fetchProgrammingLanguageThunk} from "../../../Thunk/ProgrammingLanguageThunk";
-
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 const validate = (values: QuestionCreateType) => {
     const errors: any = {};
@@ -41,7 +41,11 @@ interface Fields {
 
 type FieldsList = Fields[]
 
-function QuestionCreate(props : ProgrammingLanguageProps) {
+function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+function QuestionCreate(props : StoreProps) {
 
     const formFields: FieldsList = [
         {
@@ -80,7 +84,7 @@ function QuestionCreate(props : ProgrammingLanguageProps) {
     const dispatch = useAppDispatch()
 
     const createQuestion = (value : QuestionCreateType) => {
-        dispatch(createQuestionThunk(value)).then(() => alert("success"))
+        dispatch(createQuestionThunk(value)).then(() => handleClick())
     };
     const getLanguages = () => {
         dispatch(fetchProgrammingLanguageThunk())
@@ -89,6 +93,19 @@ function QuestionCreate(props : ProgrammingLanguageProps) {
     useEffect(() => {
         getLanguages()
     }, [])
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
     
     return (
         <div className={classes.Form}>
@@ -105,7 +122,7 @@ function QuestionCreate(props : ProgrammingLanguageProps) {
                                         {item.field}
                                     </Grid>
                                 ))}
-                                <Grid item style={{ marginTop: 16 }}>
+                                <Grid key={"button"} item style={{ marginTop: 16 }}>
                                     <Button
                                         type="button"
                                         variant="contained"
@@ -115,7 +132,7 @@ function QuestionCreate(props : ProgrammingLanguageProps) {
                                         Reset
                                     </Button>
                                 </Grid>
-                                <Grid item style={{marginTop: 16}}>
+                                <Grid key={"submit"} item style={{marginTop: 16}}>
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -130,11 +147,16 @@ function QuestionCreate(props : ProgrammingLanguageProps) {
                     </form>
                 )}
              />
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">
+                    Question creation successful!
+                </Alert>
+            </Snackbar>
         </div>
     );
 }
 
-const mapStateToProps = (state: ProgrammingLanguageProps) => ({
+const mapStateToProps = (state: StoreProps) => ({
     programmingLanguages: state.programmingLanguages,
 })
 

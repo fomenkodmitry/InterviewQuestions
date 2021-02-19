@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Domain.QuestionAnswer;
 using Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services.Implementations
 {
@@ -16,10 +19,16 @@ namespace Services.Implementations
 
         public IEnumerable<QuestionAnswerModel> Get(QuestionAnswerFilter filter)
         {
+            var query = _genericRepository.Get<QuestionAnswerModel>().AsQueryable();
             if(filter.ProgrammingLanguageId.HasValue)
-                return _genericRepository.Get<QuestionAnswerModel>(p => p.ProgrammingLanguageId == filter.ProgrammingLanguageId);
-            
-            return _genericRepository.Get<QuestionAnswerModel>();
+                query = query.Where(p => p.ProgrammingLanguageId == filter.ProgrammingLanguageId);
+            if (!string.IsNullOrEmpty(filter.SearchText))
+                query = query.Where(p =>
+                    EF.Functions.ILike(p.Question, $"%{filter.SearchText}%") 
+                    ||
+                    EF.Functions.ILike(p.Answer, $"%{filter.SearchText}%") 
+                );
+            return query;
         }
 
         public async Task<QuestionAnswerModel> Create(QuestionAnswerModel model)
@@ -32,7 +41,6 @@ namespace Services.Implementations
                 IsDelete = false,
                 ProgrammingLanguageId = model.ProgrammingLanguageId
             });
-            
             
         }
     }

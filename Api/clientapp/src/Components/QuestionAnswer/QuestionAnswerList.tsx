@@ -5,9 +5,9 @@ import Typography from "@material-ui/core/Typography";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {QuestionAndProgrammingProps} from "../../Type/Props";
+import {StoreProps} from "../../Type/Props";
 
-export function QuestionAnswerList(props: QuestionAndProgrammingProps) {
+export function QuestionAnswerList(props: StoreProps) {
     const useStyles = makeStyles((theme) => ({
         heading: {
             fontSize: theme.typography.pxToRem(15),
@@ -26,7 +26,7 @@ export function QuestionAnswerList(props: QuestionAndProgrammingProps) {
         }
     }));
     const classes = useStyles();
-    
+
     return (
         <ul className={classes.ulElement}>
             {props?.questionAnswers?.map(item => (

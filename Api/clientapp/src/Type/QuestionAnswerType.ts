@@ -15,3 +15,9 @@ export interface QuestionCreateType
     answer: string
     programmingLanguageId: string
 }
+
+export interface QuestionFilterType
+{
+    programmingLanguageId?: string
+    searchText?: string
+}

@@ -8,10 +8,11 @@ import {connect} from "react-redux";
 import AddIcon from '@material-ui/icons/Add';
 import {useHistory} from "react-router-dom";
 import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
-import {QuestionAndProgrammingProps} from "../../Type/Props";
+import {StoreProps} from "../../Type/Props";
+import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 
 //если export default, то не нужно использовать скобки
-function QuestionAnswer(props: QuestionAndProgrammingProps) {
+function QuestionAnswer(props: StoreProps) {
     const useStyles = makeStyles((theme) => ({
         cardGrid: {
             paddingTop: theme.spacing(8),
@@ -20,7 +21,7 @@ function QuestionAnswer(props: QuestionAndProgrammingProps) {
             wordBreak: "break-all"
         },
         fab: {
-            position: 'absolute',
+            position: 'fixed',
             bottom: theme.spacing(2),
             right: theme.spacing(2),
         },
@@ -29,8 +30,8 @@ function QuestionAnswer(props: QuestionAndProgrammingProps) {
     const classes = useStyles();
     const dispatch = useAppDispatch()
 
-    const getQuestions = (programmingLanguage?: string) => {
-        dispatch(fetchQuestionAnswerThunk(programmingLanguage))
+    const getQuestions = (filter? : QuestionFilterType) => {
+        dispatch(fetchQuestionAnswerThunk(filter))
     };
     //заполняем стор первичными данными с помощью хука для сайд действий
     useEffect(() => {
@@ -58,7 +59,7 @@ function QuestionAnswer(props: QuestionAndProgrammingProps) {
 
 
 //можно получать уже готовые стейты
-const mapStateToProps = (state: QuestionAndProgrammingProps) => ({
+const mapStateToProps = (state: StoreProps) => ({
     programmingLanguages: state.programmingLanguages,
     questionAnswers: state.questionAnswers
 })

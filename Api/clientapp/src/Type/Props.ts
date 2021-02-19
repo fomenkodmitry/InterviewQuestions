@@ -1,11 +1,9 @@
 ﻿import {ProgrammingLanguageTypeList} from "./ProgrammingLanguageType";
 import {QuestionAnswerTypeList} from "./QuestionAnswerType";
+import {ValueType} from "./ValueType";
 
-export interface QuestionAndProgrammingProps {
+export interface StoreProps {
     programmingLanguages?: ProgrammingLanguageTypeList
     questionAnswers?: QuestionAnswerTypeList
-}
-
-export interface ProgrammingLanguageProps {
-    programmingLanguages?: ProgrammingLanguageTypeList
+    values?: ValueType
 }

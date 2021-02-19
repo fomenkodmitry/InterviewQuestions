@@ -1,4 +1,4 @@
-﻿import {makeStyles} from '@material-ui/core/styles';
+﻿import {fade, makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -6,6 +6,7 @@ import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import FadeMenu from "../Menu/FadeMenu";
 import {useHistory} from "react-router-dom";
 import {useLocation} from "react-router-dom";
+import Search from "../Input/Search";
 
 export function Header() {
 
@@ -39,6 +40,7 @@ export function Header() {
                 <Typography variant="h6" className={classes.title} onClick={home}>
                     Interview questions
                 </Typography>
+                {location.pathname == "/" && <Search/>}
                 {location.pathname == "/" && <FadeMenu/>}
             </Toolbar>
         </AppBar>
