@@ -16,6 +16,10 @@ export function Header() {
         },
         title: {
             flexGrow: 1,
+            display: 'none',
+            [theme.breakpoints.up('sm')]: {
+                display: 'block',
+            },
         },
         backgroundColorBar: {
             background: '#323234'
@@ -36,7 +40,7 @@ export function Header() {
     return (
         <AppBar className={classes.backgroundColorBar} position="relative">
             <Toolbar>
-                <QuestionAnswerIcon/>
+                <QuestionAnswerIcon onClick={home}/>
                 <Typography variant="h6" className={classes.title} onClick={home}>
                     Interview questions
                 </Typography>

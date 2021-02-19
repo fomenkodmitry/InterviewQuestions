@@ -11,14 +11,25 @@ export function QuestionAnswerList(props: StoreProps) {
     const useStyles = makeStyles((theme) => ({
         heading: {
             fontSize: theme.typography.pxToRem(15),
-            flexBasis: '55.55%',
+            flexBasis: '85.55%',
             flexShrink: 0,
+            [theme.breakpoints.up('sm')]: {
+                flexBasis: '75.55%',
+            },
         },
         secondaryHeading: {
             fontSize: theme.typography.pxToRem(15),
             color: theme.palette.text.secondary,
         },
+        textHidden : {
+            [theme.breakpoints.down('xs')]: {
+                display: 'none',
+            },
+        },
         accordionItem: {
+            marginTop: '20px',
+        },
+        gridItem: {
             marginTop: '20px',
         },
         ulElement: {
@@ -30,12 +41,13 @@ export function QuestionAnswerList(props: StoreProps) {
     return (
         <ul className={classes.ulElement}>
             {props?.questionAnswers?.map(item => (
-                <Grid item xs={12} key={item.id}>
+                <Grid item xs={12} key={item.id} className={classes.gridItem}>
                     <Accordion className={classes.accordionItem}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography className={classes.heading}>{item.question}</Typography>
-                            <Typography className={classes.secondaryHeading}>Programming
-                                language: {props.programmingLanguages?.find(p => p.id == item.programmingLanguageId)?.name}</Typography>
+                            <Typography className={classes.secondaryHeading}>
+                                <span className={classes.textHidden}>Language:</span> {props.programmingLanguages?.find(p => p.id == item.programmingLanguageId)?.name}
+                            </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>{item.answer}</Typography>

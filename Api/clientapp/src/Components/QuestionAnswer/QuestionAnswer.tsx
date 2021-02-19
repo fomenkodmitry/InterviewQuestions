@@ -15,10 +15,10 @@ import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 function QuestionAnswer(props: StoreProps) {
     const useStyles = makeStyles((theme) => ({
         cardGrid: {
-            paddingTop: theme.spacing(8),
+            paddingTop: theme.spacing(1),
             paddingBottom: theme.spacing(8),
             flexGrow: 1,
-            wordBreak: "break-all"
+            paddingLeft: 1,
         },
         fab: {
             position: 'fixed',

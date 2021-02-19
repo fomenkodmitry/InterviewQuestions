@@ -18,9 +18,10 @@ function Search(props : StoreProps) {
             '&:hover': {
                 backgroundColor: fade(theme.palette.common.white, 0.25),
             },
-            marginLeft: 0,
+            marginLeft: theme.spacing(2),
             width: '100%',
             [theme.breakpoints.up('sm')]: {
+                paddingLeft: theme.spacing(1),
                 marginLeft: theme.spacing(1),
                 width: 'auto',
             },

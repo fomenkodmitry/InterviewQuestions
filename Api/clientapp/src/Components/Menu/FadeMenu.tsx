@@ -27,7 +27,15 @@ function FadeMenu(props: StoreProps) {
 
     const useStyles = makeStyles((theme) => ({
         fade: {
-            color: '#FFFFFF'
+            color: '#FFFFFF',
+            flexGrow: 1,
+            paddingLeft: theme.spacing(2)
+        },
+        textHidden : {
+            display: 'none',
+            [theme.breakpoints.up('sm')]: {
+                display: 'block',
+            },
         }
     }));
     const classes = useStyles();
@@ -53,7 +61,7 @@ function FadeMenu(props: StoreProps) {
     return (
         <div>
             <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick} className={classes.fade}>
-                Selected language: {props.programmingLanguages?.find(p => p.id == props.values?.programmingLanguageId)?.name ?? "All"}
+                <a className={classes.textHidden}>Selected language:&nbsp;</a> {props.programmingLanguages?.find(p => p.id == props.values?.programmingLanguageId)?.name ?? "All"}
             </Button>
             <Menu
                 id="fade-menu"

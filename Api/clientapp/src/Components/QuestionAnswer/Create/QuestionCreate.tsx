@@ -75,7 +75,7 @@ function QuestionCreate(props : StoreProps) {
             padding: 16,
             margin: 'auto',
             maxWidth: 600,
-            paddingTop: theme.spacing(8),
+            paddingTop: theme.spacing(6),
         }
     }));
 
