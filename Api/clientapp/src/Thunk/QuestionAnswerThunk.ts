@@ -1,5 +1,6 @@
 ﻿import { createAsyncThunk } from '@reduxjs/toolkit'
 import {QuestionAnswerTypeList, QuestionFilterType} from "../Type/QuestionAnswerType";
+import {BASE_URL} from "../Const/Const";
 //просто запрос асинхронный
 export const fetchQuestionAnswerThunk = createAsyncThunk(
     'QuestionAnswer',
@@ -22,7 +23,7 @@ export const fetchQuestionAnswerThunk = createAsyncThunk(
             return searchParams.toString()
         }
         
-        const response = await fetch(`https://localhost:5001/api/QuestionAnswer?${serialize(filter)}`)
+        const response = await fetch(`${BASE_URL}/QuestionAnswer?${serialize(filter)}`)
         return (await response.json()) as QuestionAnswerTypeList
     }
 )
