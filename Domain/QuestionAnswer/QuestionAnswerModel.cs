@@ -8,14 +8,12 @@ namespace Domain.QuestionAnswer
 {
     public class QuestionAnswerModel : BaseModel
     {
-        [Required]
-        public Guid ProgrammingLanguageId { get; set; }
         [MaxLength(255)]
         [Required]
         public string Question { get; set; }
         [Required]
         public string Answer { get; set; }
         
-        public ICollection<QuestionAnswerToTagModel> TagList { get; set; }
+        public ICollection<QuestionAnswerToTagModel> TagIds { get; set; }
     }
 }

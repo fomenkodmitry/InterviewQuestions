@@ -3,7 +3,7 @@ export interface QuestionAnswerType {
     id: string
     question: string
     answer: string
-    tagsId: string[]
+    tagIds: string[]
 }
 
 export type QuestionAnswerTypeList = QuestionAnswerType[]
@@ -13,11 +13,11 @@ export interface QuestionCreateType
 {
     question: string
     answer: string
-    tagsId: string[]
+    tagIds: string[]
 }
 
 export interface QuestionFilterType
 {
-    tagsId?: string[]
+    tagIds?: string[]
     searchText?: string
 }

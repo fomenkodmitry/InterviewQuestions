@@ -9,6 +9,7 @@ namespace Domain.QuestionAnswer
     {
         [JsonIgnore]
         public QuestionAnswerModel QuestionAnswer { get; set; }
+        [JsonIgnore]
         public Guid QuestionAnswerId { get; set; }
        
         [JsonIgnore]

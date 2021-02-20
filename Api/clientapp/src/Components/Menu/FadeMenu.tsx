@@ -7,7 +7,7 @@ import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
 import {connect} from "react-redux";
 import {StoreProps} from "../../Type/Props";
 import {QuestionFilterType} from "../../Type/QuestionAnswerType";
-import {changeProgrammingLanguageIdAction} from "../../Reducer/ValueReducer";
+import {changeTagIdsAction, getTagIdsAction} from "../../Reducer/ValueReducer";
 import {Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, Select} from "@material-ui/core";
 
 
@@ -38,7 +38,7 @@ function FadeMenu(props: StoreProps) {
     const getQuestions = (filter? : QuestionFilterType) => {
         dispatch(fetchQuestionAnswerThunk(filter))
         handleClose()
-        dispatch(changeProgrammingLanguageIdAction(filter?.tagsId))
+        dispatch(changeTagIdsAction(filter?.tagIds))
     };
 
     const getLanguages = () => {

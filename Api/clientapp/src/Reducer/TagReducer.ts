@@ -4,7 +4,7 @@ import {TagsTypeList} from "../Type/TagsType";
 
 const initialState : TagsTypeList = []
 
-export const programmingLanguageReducer = createReducer(
+export const tagReducer = createReducer(
     initialState,
     (builder) => {
         builder

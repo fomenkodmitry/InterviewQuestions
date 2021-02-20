@@ -1,4 +1,4 @@
 ﻿export interface ValueType {
-    tagsId? : string[];
+    tagIds? : string[];
     searchText? : string;
 }

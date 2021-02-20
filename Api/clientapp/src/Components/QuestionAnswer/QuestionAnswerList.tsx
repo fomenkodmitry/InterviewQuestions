@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 
 export function QuestionAnswerList(props: StoreProps) {
     const classes = useStyles();
-
     return (
         <ul className={classes.ulElement}>
             {props?.questionAnswers?.map(item => (
@@ -47,7 +46,7 @@ export function QuestionAnswerList(props: StoreProps) {
                         <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography className={classes.heading}>{item.question}</Typography>
                             <Typography className={classes.secondaryHeading}>
-                                <span className={classes.textHidden}>Tags:</span> {props.tags?.find(p => item.tagsId.find(t => t == p.id))?.name}
+                                <span className={classes.textHidden}>Tags:</span> {item.tagIds.concat()}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>

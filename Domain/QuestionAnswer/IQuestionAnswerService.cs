@@ -5,7 +5,7 @@ namespace Domain.QuestionAnswer
 {
     public interface IQuestionAnswerService
     {
-        public IEnumerable<QuestionAnswerModel> Get(QuestionAnswerFilter programmingLanguage);
-        public Task<QuestionAnswerModel> Create(QuestionAnswerModel model);
+        public IEnumerable<QuestionAnswerViewDto> Get(QuestionAnswerFilter programmingLanguage);
+        public Task<QuestionAnswerModel> Create(QuestionAnswerCreateDto model);
     }
 }

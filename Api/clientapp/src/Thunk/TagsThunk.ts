@@ -5,7 +5,7 @@ import {TagsTypeList} from "../Type/TagsType";
 export const fetchTagsThunk = createAsyncThunk(
     'Tags',
     async () => {
-        const response = await fetch(`${BASE_URL}/Tags`)
+        const response = await fetch(`${BASE_URL}/Tag`)
         return (await response.json()) as TagsTypeList
     }
 )

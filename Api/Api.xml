@@ -91,7 +91,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.QuestionAnswerController.Create(Domain.QuestionAnswer.QuestionAnswerModel)">
+        <member name="M:Api.Controllers.QuestionAnswerController.Create(Domain.QuestionAnswer.QuestionAnswerCreateDto)">
             <summary>
             Create question
             </summary>

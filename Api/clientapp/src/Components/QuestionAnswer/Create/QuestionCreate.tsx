@@ -28,8 +28,8 @@ const validate = (values: QuestionCreateType) => {
     if (!values.answer) {
         errors.answer = 'Required';
     }
-    if (!values.tagsId) {
-        errors.tagsId = 'Required';
+    if (!values.tagIds) {
+        errors.tagIds = 'Required';
     }
     return errors;
 };
@@ -69,12 +69,12 @@ function QuestionCreate(props : StoreProps) {
             size: 12,
             field: (
                 <Select
-                    name="programmingLanguageId"
+                    name="tagIds"
                     label="Select a language"
                     formControlProps={{margin: 'none'}}
                     multiple
                 >
-                    {props?.tags?.map(item => (<MenuItem value={item.id}>{item.name}</MenuItem>))}
+                    {props?.tags?.map(item => (<MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>))}
                 </Select>
             ),
         },

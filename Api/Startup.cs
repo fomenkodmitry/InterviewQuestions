@@ -1,6 +1,5 @@
 using Api.Middleware;
 using Api.Scheduler;
-using Api.Utils.AutoMapper;
 using Infrastructure.AppSettings;
 using Infrastructure.Contexts;
 using Infrastructure.Repositories;
@@ -21,6 +20,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Autofac;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
+using Domain.DomainToModelProfile;
 using Domain.QuestionAnswer;
 using Domain.Tag;
 
@@ -120,7 +120,7 @@ namespace Api
                 .InstancePerLifetimeScope();
 
             // Auto Mapper Configurations
-            builder.RegisterAutoMapper(p => p.AddProfile(new MappingProfile()));
+            builder.RegisterAutoMapper(p => p.AddProfile(new DomainToModelProfile()));
 
             #region DI Service
 

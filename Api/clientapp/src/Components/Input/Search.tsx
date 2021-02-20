@@ -5,7 +5,7 @@ import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
 import {useAppDispatch} from "../../Store/Store";
 import React, {useEffect} from "react";
-import {changeSearchTextAction, getProgrammingLanguageIdAction, getSearchTextAction} from "../../Reducer/ValueReducer";
+import {changeSearchTextAction, getTagIdsAction, getSearchTextAction} from "../../Reducer/ValueReducer";
 import {StoreProps} from "../../Type/Props";
 import {connect} from "react-redux";
 
@@ -61,7 +61,7 @@ function Search(props : StoreProps) {
         dispatch(fetchQuestionAnswerThunk(filter))
     };
     const getProgrammingLanguageId = () => {
-        dispatch(getProgrammingLanguageIdAction)
+        dispatch(getTagIdsAction)
     };
 
     const setSearchText = (value? : string) => {
@@ -80,7 +80,7 @@ function Search(props : StoreProps) {
             return;
         if(e.target.value.length == 0 && props?.values?.searchText != undefined) {
             const filter : QuestionFilterType = {
-                tagsId : props?.values?.tagsId
+                tagIds : props?.values?.tagIds
             }
             getQuestions(filter);
             return;            
@@ -89,7 +89,7 @@ function Search(props : StoreProps) {
             getProgrammingLanguageId()
             const filter : QuestionFilterType = {
                 searchText : e.target.value,
-                tagsId : props.values?.tagsId
+                tagIds : props.values?.tagIds
             }
             setSearchText(e.target.value)
             getQuestions(filter)

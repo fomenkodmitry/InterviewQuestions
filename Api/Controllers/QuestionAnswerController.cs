@@ -31,7 +31,7 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<QuestionAnswerModel>> Get([FromQuery] QuestionAnswerFilter filter)
+        public ActionResult<IEnumerable<QuestionAnswerViewDto>> Get([FromQuery] QuestionAnswerFilter filter)
         {
             return Ok(_questionAnswerService.Get(filter));
         }
@@ -41,7 +41,7 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<QuestionAnswerModel>> Create(QuestionAnswerModel model)
+        public async Task<ActionResult<QuestionAnswerModel>> Create(QuestionAnswerCreateDto model)
         {
             return Ok(await _questionAnswerService.Create(model));
         }
