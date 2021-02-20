@@ -9,6 +9,7 @@ import {StoreProps} from "../../Type/Props";
 import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 import {changeTagIdsAction, getTagIdsAction} from "../../Reducer/ValueReducer";
 import {Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, Select} from "@material-ui/core";
+import Hidden from "@material-ui/core/Hidden";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,14 +72,14 @@ function FadeMenu(props: StoreProps) {
 
     return (
         <div>
-            <Button className={classes.dialog} onClick={handleClickOpen}>Open tags</Button>
+            <Button className={classes.dialog} onClick={handleClickOpen}><Hidden smDown>Open</Hidden> Tags</Button>
             <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Please select tags</DialogTitle>
                 <DialogContent>
                     <form className={classes.container}>
                         <FormControl className={classes.formControl}>
                             <InputLabel shrink htmlFor="select-multiple-native">
-                                Native
+                                Langs
                             </InputLabel>
                             <Select
                                 multiple
