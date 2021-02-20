@@ -80,7 +80,7 @@ function Search(props : StoreProps) {
             return;
         if(e.target.value.length == 0 && props?.values?.searchText != undefined) {
             const filter : QuestionFilterType = {
-                programmingLanguageId : props?.values?.programmingLanguageId
+                tagsId : props?.values?.tagsId
             }
             getQuestions(filter);
             return;            
@@ -89,7 +89,7 @@ function Search(props : StoreProps) {
             getProgrammingLanguageId()
             const filter : QuestionFilterType = {
                 searchText : e.target.value,
-                programmingLanguageId : props.values?.programmingLanguageId
+                tagsId : props.values?.tagsId
             }
             setSearchText(e.target.value)
             getQuestions(filter)

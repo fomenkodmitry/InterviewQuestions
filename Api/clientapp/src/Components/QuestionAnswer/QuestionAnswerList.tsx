@@ -47,7 +47,7 @@ export function QuestionAnswerList(props: StoreProps) {
                         <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography className={classes.heading}>{item.question}</Typography>
                             <Typography className={classes.secondaryHeading}>
-                                <span className={classes.textHidden}>Language:</span> {props.programmingLanguages?.find(p => p.id == item.programmingLanguageId)?.name}
+                                <span className={classes.textHidden}>Tags:</span> {props.tags?.find(p => item.tagsId.find(t => t == p.id))?.name}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>

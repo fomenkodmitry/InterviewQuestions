@@ -1,7 +1,7 @@
 ﻿import { createAction, createReducer } from '@reduxjs/toolkit'
 import {ValueType} from "../Type/ValueType";
 
-export const changeProgrammingLanguageIdAction = createAction<string | undefined>('value/setProgrammingLanguageId')
+export const changeProgrammingLanguageIdAction = createAction<string[] | undefined>('value/setProgrammingLanguageId')
 export const getProgrammingLanguageIdAction = createAction('value/getProgrammingLanguageId')
 
 export const changeSearchTextAction = createAction<string | undefined>('value/setSearchText')
@@ -12,7 +12,7 @@ const initialState = {} as ValueType
 export const valueReducer = createReducer(initialState, (builder) => {
     builder
         .addCase(changeProgrammingLanguageIdAction, (state, action) => {
-            state.programmingLanguageId = action.payload
+            state.tagsId = action.payload
             return state;
         })
         .addCase(getProgrammingLanguageIdAction, (state) => {

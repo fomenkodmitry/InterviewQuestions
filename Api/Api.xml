@@ -4,42 +4,6 @@
         <name>Api</name>
     </assembly>
     <members>
-        <member name="T:Api.Controllers.AuthController">
-            <summary>
-            Login user
-            </summary>
-        </member>
-        <member name="M:Api.Controllers.AuthController.#ctor(Domain.Authenticate.IAuthenticationService,Domain.User.IUserService)">
-            <summary>
-            DI ctor
-            </summary>
-            <param name="authenticateService"></param>
-            <param name="userService"></param>
-        </member>
-        <member name="M:Api.Controllers.AuthController.Login(Domain.Authenticate.UserLoginRequestDto,System.String,System.String)">
-            <summary>
-            User login
-            </summary>
-            <param name="requestDto" class="UserLoginRequestDto"></param>
-            <param name="userAgent">Header - User-Agent</param>
-            <param name="appVersion">Header - X-Application-Version</param>
-            <returns class="UserLoginResponseDto">UserLoginResponseDto</returns>
-        </member>
-        <member name="M:Api.Controllers.AuthController.Registration(Domain.Authenticate.UserRegistrationRequestDto,System.String,System.String)">
-            <summary>
-            User registration
-            </summary>
-            <param name="requestDto">Reg user data</param>
-            <param name="userAgent">Header - User-Agent</param>
-            <param name="appVersion">Header - X-Application-Version</param>
-            <returns class = "UserRegistrationResponseDto">UserRegistrationResponseDto</returns>
-        </member>
-        <member name="M:Api.Controllers.AuthController.Logout">
-            <summary>
-            Logout
-            </summary>
-            <returns>200 OK</returns>
-        </member>
         <member name="T:Api.Controllers.Base.BaseApiController`2">
             <summary>
             Base Api class
@@ -47,7 +11,7 @@
             <typeparam name="T"></typeparam>
             <typeparam name="TFilter"></typeparam>
         </member>
-        <member name="M:Api.Controllers.Base.BaseApiController`2.#ctor(Domain.User.IUserService,AutoMapper.IMapper)">
+        <member name="M:Api.Controllers.Base.BaseApiController`2.#ctor(AutoMapper.IMapper)">
             <summary>
             DI ctor
             </summary>
@@ -110,11 +74,16 @@
             <param name="result">Result</param>
             <returns>Container With result</returns>
         </member>
-        <member name="M:Api.Controllers.ProgrammingLanguageController.Get">
+        <member name="T:Api.Controllers.QuestionAnswerController">
             <summary>
-            Get pl data
+            Question answer controller
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.QuestionAnswerController.#ctor(Domain.QuestionAnswer.IQuestionAnswerService)">
+            <summary>
+            DI
+            </summary>
+            <param name="questionAnswerService"></param>
         </member>
         <member name="M:Api.Controllers.QuestionAnswerController.Get(Domain.QuestionAnswer.QuestionAnswerFilter)">
             <summary>
@@ -128,21 +97,20 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Api.Controllers.UserController">
+        <member name="T:Api.Controllers.TagController">
             <summary>
-            Users
+            Tags
             </summary>
         </member>
-        <member name="M:Api.Controllers.UserController.#ctor(AutoMapper.IMapper,Domain.User.IUserService)">
+        <member name="M:Api.Controllers.TagController.#ctor(Domain.Tag.ITagService)">
             <summary>
             DI
             </summary>
-            <param name="mapper"></param>
-            <param name="userService"></param>
+            <param name="tagService"></param>
         </member>
-        <member name="M:Api.Controllers.UserController.Self">
+        <member name="M:Api.Controllers.TagController.Get">
             <summary>
-            Get current user data
+            Get tag data
             </summary>
             <returns></returns>
         </member>

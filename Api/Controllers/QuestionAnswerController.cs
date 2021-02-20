@@ -2,12 +2,14 @@
 using System.Threading.Tasks;
 using Api.Controllers.Base;
 using Domain.QuestionAnswer;
-using Domain.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// Question answer controller
+    /// </summary>
     [ApiController]
     [AllowAnonymous]
     [Route("api/[controller]")]
@@ -15,7 +17,11 @@ namespace Api.Controllers
     {
         private readonly IQuestionAnswerService _questionAnswerService;
         
-        public QuestionAnswerController(IUserService userService, IQuestionAnswerService questionAnswerService) : base(userService)
+        /// <summary>
+        /// DI
+        /// </summary>
+        /// <param name="questionAnswerService"></param>
+        public QuestionAnswerController(IQuestionAnswerService questionAnswerService) : base()
         {
             _questionAnswerService = questionAnswerService;
         }

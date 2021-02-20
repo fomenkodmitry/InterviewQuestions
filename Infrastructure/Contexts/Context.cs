@@ -1,10 +1,5 @@
-﻿using Domain.Audit;
-using Domain.FileStorage;
-using Domain.ProgrammingLanguage;
-using Domain.QuestionAnswer;
-using Domain.Srbac;
-using Domain.Token;
-using Domain.User;
+﻿using Domain.QuestionAnswer;
+using Domain.Tag;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts
@@ -15,21 +10,15 @@ namespace Infrastructure.Contexts
         {
         }
         
-        public DbSet<UserModel> Users { get; set; }
-        public DbSet<TokenModel> Tokens { get; set; }
-        public DbSet<SrbacRolePermissionModel> SrbacRolePermissions { get; set; }
-        public DbSet<AuditModel> Audits { get; set; }
-        public DbSet<FileModel> Files { get; set; }
         public DbSet<QuestionAnswerModel> QuestionAnswers { get; set; }
-        public DbSet<ProgrammingLanguageModel> ProgrammingLanguages { get; set; }
+        public DbSet<TagModel> Tags { get; set; }
+        public DbSet<QuestionAnswerToTagModel> QuestionAnswerToTags { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-            modelBuilder.Entity<SrbacRolePermissionModel>()
-                .HasIndex(b => new {b.Role, b.Permission})
+            modelBuilder.Entity<QuestionAnswerToTagModel>()
+                .HasIndex(b => new {b.QuestionAnswerId, b.TagId})
                 .IsUnique();
-
         }
     }
 }

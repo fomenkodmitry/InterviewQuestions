@@ -1,18 +1,8 @@
 using Api.Middleware;
 using Api.Scheduler;
 using Api.Utils.AutoMapper;
-using Domain.Audit;
-using Domain.Authenticate;
-using Domain.FileStorage;
-using Domain.Srbac;
-using Domain.Token;
-using Domain.User;
-using Infrastructure;
 using Infrastructure.AppSettings;
 using Infrastructure.Contexts;
-using Infrastructure.Crypto;
-using Infrastructure.Email;
-using Infrastructure.FileStorage;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -31,9 +21,8 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Autofac;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
-using Domain.ProgrammingLanguage;
 using Domain.QuestionAnswer;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Domain.Tag;
 
 namespace Api
 {
@@ -145,25 +134,10 @@ namespace Api
                 .As<IConfigurationRoot>()
                 .SingleInstance();
 
-            builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
-            builder.RegisterType<TokenService>().As<ITokenService>();
-            builder.RegisterType<UserService>().As<IUserService>();
             builder.RegisterType<QuestionAnswerService>().As<IQuestionAnswerService>();
-            builder.RegisterType<ProgrammingLanguageService>().As<IProgrammingLanguageService>();
+            builder.RegisterType<TagService>().As<ITagService>();
 
-            builder.RegisterType<SrbacService>().As<ISrbacService>().SingleInstance();
-            builder.RegisterType<CryptoHelper>().SingleInstance();
             builder.RegisterType<ScheduleTask>().As<IHostedService>().SingleInstance();
-            builder
-                .Register(p => Configuration
-                    .GetSection(nameof(FileStorageConfiguration))
-                    .Get<FileStorageConfiguration>()
-                )
-                .As<FileStorageConfiguration>()
-                .SingleInstance();
-
-            builder.RegisterType<FileStorageService>().As<IFileStorageService>();
-            builder.RegisterType<AuditService>().As<IAuditService>();
 
             builder
                 .RegisterInstance(Configuration
@@ -181,28 +155,13 @@ namespace Api
             builder.RegisterType<SqlRepository>();
             #endregion
             
-            #region DI Infrastructure
-            
-            builder
-                .RegisterInstance(Configuration
-                    .GetSection(nameof(EmailConfiguration))
-                    .Get<EmailConfiguration>()
-                )
-                .As<EmailConfiguration>()
-                .SingleInstance();
-            
-            builder.RegisterType<EmailSender>().As<IEmailSender>();
-
-            builder.RegisterType<InitializeInfrastructure>();
-            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app,
             IWebHostEnvironment env,
-            ILoggerFactory loggerFactory,
-            InitializeInfrastructure infrastructure
+            ILoggerFactory loggerFactory
         )
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -234,7 +193,6 @@ namespace Api
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             
             UpdateDatabase(app);
-            infrastructure.FileStorage();
             var logger = loggerFactory.CreateLogger("LoggerInStartup");
             logger.LogInformation($"\n\n{DateTime.Now} | Startup logger was launched");
         }

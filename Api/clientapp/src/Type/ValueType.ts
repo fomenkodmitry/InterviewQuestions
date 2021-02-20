@@ -1,4 +1,4 @@
 ﻿export interface ValueType {
-    programmingLanguageId? : string;
+    tagsId? : string[];
     searchText? : string;
 }

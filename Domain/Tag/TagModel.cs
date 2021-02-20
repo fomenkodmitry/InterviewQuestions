@@ -2,9 +2,9 @@
 using Domain.Base;
 using Toolbelt.ComponentModel.DataAnnotations.Schema.V5;
 
-namespace Domain.ProgrammingLanguage
+namespace Domain.Tag
 {
-    public class ProgrammingLanguageModel : BaseModel
+    public class TagModel : BaseModel
     {
         [IndexColumn(IsClustered =  false, IsUnique = true)]
         [MaxLength(50)]

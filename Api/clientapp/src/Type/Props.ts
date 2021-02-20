@@ -1,9 +1,9 @@
-﻿import {ProgrammingLanguageTypeList} from "./ProgrammingLanguageType";
-import {QuestionAnswerTypeList} from "./QuestionAnswerType";
+﻿import {QuestionAnswerTypeList} from "./QuestionAnswerType";
 import {ValueType} from "./ValueType";
+import {TagsTypeList} from "./TagsType";
 
 export interface StoreProps {
-    programmingLanguages?: ProgrammingLanguageTypeList
+    tags?: TagsTypeList
     questionAnswers?: QuestionAnswerTypeList
     values?: ValueType
 }

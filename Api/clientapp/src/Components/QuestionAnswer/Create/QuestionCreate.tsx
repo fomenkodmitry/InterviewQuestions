@@ -17,7 +17,7 @@ import {useAppDispatch} from "../../../Store/Store";
 import {QuestionCreateType} from "../../../Type/QuestionAnswerType";
 import {connect} from "react-redux";
 import {StoreProps} from "../../../Type/Props";
-import {fetchProgrammingLanguageThunk} from "../../../Thunk/ProgrammingLanguageThunk";
+import {fetchTagsThunk} from "../../../Thunk/TagsThunk";
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 const validate = (values: QuestionCreateType) => {
@@ -28,8 +28,8 @@ const validate = (values: QuestionCreateType) => {
     if (!values.answer) {
         errors.answer = 'Required';
     }
-    if (!values.programmingLanguageId) {
-        errors.programmingLanguageId = 'Required';
+    if (!values.tagsId) {
+        errors.tagsId = 'Required';
     }
     return errors;
 };
@@ -72,8 +72,9 @@ function QuestionCreate(props : StoreProps) {
                     name="programmingLanguageId"
                     label="Select a language"
                     formControlProps={{margin: 'none'}}
+                    multiple
                 >
-                    {props?.programmingLanguages?.map(item => (<MenuItem value={item.id}>{item.name}</MenuItem>))}
+                    {props?.tags?.map(item => (<MenuItem value={item.id}>{item.name}</MenuItem>))}
                 </Select>
             ),
         },
@@ -87,7 +88,7 @@ function QuestionCreate(props : StoreProps) {
         dispatch(createQuestionThunk(value)).then(() => handleClick())
     };
     const getLanguages = () => {
-        dispatch(fetchProgrammingLanguageThunk())
+        dispatch(fetchTagsThunk())
     };
 
     useEffect(() => {
@@ -157,7 +158,7 @@ function QuestionCreate(props : StoreProps) {
 }
 
 const mapStateToProps = (state: StoreProps) => ({
-    programmingLanguages: state.programmingLanguages,
+    tags: state.tags,
 })
 
 // подключение компонента к стору

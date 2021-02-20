@@ -5,7 +5,6 @@ using AutoMapper;
 using Domain.Base;
 using Domain.Error;
 using Domain.Filter;
-using Domain.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -27,7 +26,7 @@ namespace Api.Controllers.Base
         /// </summary>
         /// <param name="userService"></param>
         /// <param name="mapper"></param>
-        protected BaseApiController(IUserService userService, IMapper mapper) : base (userService)
+        protected BaseApiController(IMapper mapper) : base ()
         {
             Mapper = mapper;
         }

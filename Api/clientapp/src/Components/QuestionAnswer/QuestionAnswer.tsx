@@ -61,7 +61,7 @@ function QuestionAnswer(props: StoreProps) {
 
 //можно получать уже готовые стейты
 const mapStateToProps = (state: StoreProps) => ({
-    programmingLanguages: state.programmingLanguages,
+    tags: state.tags,
     questionAnswers: state.questionAnswers
 })
 
