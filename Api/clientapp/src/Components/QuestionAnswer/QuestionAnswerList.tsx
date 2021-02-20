@@ -46,7 +46,7 @@ export function QuestionAnswerList(props: StoreProps) {
                         <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography className={classes.heading}>{item.question}</Typography>
                             <Typography className={classes.secondaryHeading}>
-                                <span className={classes.textHidden}>Tags:</span> {item.tagIds.concat()}
+                                <span className={classes.textHidden}>Tags:</span> {item.tagIds.map((id) => (props?.tags?.find(p => p?.id == id)?.name?.concat(" ")))}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>

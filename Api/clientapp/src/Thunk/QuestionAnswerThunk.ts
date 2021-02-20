@@ -12,6 +12,12 @@ const serialize = function(obj? : QuestionFilterType) {
         // @ts-ignore
         if(obj[key] != undefined)
         {
+            if(key == 'tagIds') {
+                // @ts-ignore
+                obj[key].forEach(val => searchParams.append(key, val))
+                // @ts-ignore
+                return;
+            }
             // @ts-ignore
             searchParams.append(key, obj[key])
         }

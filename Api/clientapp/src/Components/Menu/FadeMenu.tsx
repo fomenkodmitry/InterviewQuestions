@@ -37,7 +37,6 @@ function FadeMenu(props: StoreProps) {
     //update store onlick
     const getQuestions = (filter? : QuestionFilterType) => {
         dispatch(fetchQuestionAnswerThunk(filter))
-        handleClose()
         dispatch(changeTagIdsAction(filter?.tagIds))
     };
 
@@ -48,6 +47,7 @@ function FadeMenu(props: StoreProps) {
     useEffect(() => {
         getLanguages()
     }, [])
+    let filter : QuestionFilterType = {}
 
     const handleChangeMultiple = (event: React.ChangeEvent<{ value: unknown }>) => {
         const { options } = event.target as HTMLSelectElement;
@@ -57,9 +57,9 @@ function FadeMenu(props: StoreProps) {
                 value.push(options[i].value);
             }
         }
-        setPersonName(value);
+        filter.tagIds = value
+        getQuestions(filter);
     };
-    const [personName, setPersonName] = React.useState<string[]>([]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -69,7 +69,6 @@ function FadeMenu(props: StoreProps) {
     };
     const [open, setOpen] = React.useState(false);
 
-    let filter : QuestionFilterType = {}
     return (
         <div>
             <Button className={classes.dialog} onClick={handleClickOpen}>Open tags</Button>
@@ -84,7 +83,7 @@ function FadeMenu(props: StoreProps) {
                             <Select
                                 multiple
                                 native
-                                value={personName}
+                                value={props.values?.tagIds}
                                 onChange={handleChangeMultiple}
                                 inputProps={{
                                     id: 'select-multiple-native',
