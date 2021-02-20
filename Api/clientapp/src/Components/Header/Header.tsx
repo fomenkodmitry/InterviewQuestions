@@ -7,24 +7,35 @@ import FadeMenu from "../Menu/FadeMenu";
 import {useHistory} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import Search from "../Input/Search";
+import React from "react";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Hidden from '@material-ui/core/Hidden';
+
+const useStyles = makeStyles((theme) => ({
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+        display: 'flex',
+    },
+    backgroundColorBar: {
+        background: '#323234'
+    },
+    back: {
+        display: 'flex',
+        float: 'right'
+    },
+    mainIcon: {
+        [theme.breakpoints.down('md')]: {
+            flexGrow: 1,
+            float: 'left'
+        },
+    }
+}));
 
 export function Header() {
 
-    const useStyles = makeStyles((theme) => ({
-        menuButton: {
-            marginRight: theme.spacing(2),
-        },
-        title: {
-            flexGrow: 1,
-            display: 'none',
-            [theme.breakpoints.up('sm')]: {
-                display: 'block',
-            },
-        },
-        backgroundColorBar: {
-            background: '#323234'
-        }
-    }));
     const classes = useStyles();
 
     //истрия переходов + редирект
@@ -40,12 +51,23 @@ export function Header() {
     return (
         <AppBar className={classes.backgroundColorBar} position="relative">
             <Toolbar>
-                <QuestionAnswerIcon onClick={home}/>
-                <Typography variant="h6" className={classes.title} onClick={home}>
-                    Interview questions
-                </Typography>
+                <div className={classes.title}>
+                    <QuestionAnswerIcon onClick={home}/>
+                    <Hidden smDown>
+                        <Typography variant="h6" onClick={home}>
+                            Interview questions
+                        </Typography>
+                    </Hidden>
+                </div>
                 {location.pathname == "/" && <Search/>}
                 {location.pathname == "/" && <FadeMenu/>}
+                {
+                    location.pathname == "/question-create" &&
+                    <div className={classes.back}>
+                        <ArrowBackIcon onClick={home}/>
+                        <Typography onClick={home}>Back</Typography>
+                    </div>
+                }
             </Toolbar>
         </AppBar>
     );

@@ -11,6 +11,16 @@ import {connect} from "react-redux";
 import {StoreProps} from "../../Type/Props";
 import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 import {changeProgrammingLanguageIdAction} from "../../Reducer/ValueReducer";
+import Hidden from "@material-ui/core/Hidden";
+
+const useStyles = makeStyles((theme) => ({
+    fade: {
+        color: '#FFFFFF',
+        flexGrow: 1,
+        paddingLeft: theme.spacing(2)
+    },
+
+}));
 
 function FadeMenu(props: StoreProps) {
 
@@ -25,19 +35,6 @@ function FadeMenu(props: StoreProps) {
         setAnchorEl(null);
     };
 
-    const useStyles = makeStyles((theme) => ({
-        fade: {
-            color: '#FFFFFF',
-            flexGrow: 1,
-            paddingLeft: theme.spacing(2)
-        },
-        textHidden : {
-            display: 'none',
-            [theme.breakpoints.up('sm')]: {
-                display: 'block',
-            },
-        }
-    }));
     const classes = useStyles();
 
     const dispatch = useAppDispatch()
@@ -61,7 +58,7 @@ function FadeMenu(props: StoreProps) {
     return (
         <div>
             <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick} className={classes.fade}>
-                <a className={classes.textHidden}>Selected language:&nbsp;</a> {props.programmingLanguages?.find(p => p.id == props.values?.programmingLanguageId)?.name ?? "All"}
+                <Hidden mdDown>Selected language:&nbsp;</Hidden> {props.programmingLanguages?.find(p => p.id == props.values?.programmingLanguageId)?.name ?? "All"}
             </Button>
             <Menu
                 id="fade-menu"

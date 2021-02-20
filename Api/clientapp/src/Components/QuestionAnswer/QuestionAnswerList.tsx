@@ -7,35 +7,36 @@ import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {StoreProps} from "../../Type/Props";
 
+const useStyles = makeStyles((theme) => ({
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        flexBasis: '85.55%',
+        flexShrink: 0,
+        [theme.breakpoints.up('sm')]: {
+            flexBasis: '75.55%',
+        },
+    },
+    secondaryHeading: {
+        fontSize: theme.typography.pxToRem(15),
+        color: theme.palette.text.secondary,
+    },
+    textHidden : {
+        [theme.breakpoints.down('xs')]: {
+            display: 'none',
+        },
+    },
+    accordionItem: {
+        marginTop: '20px',
+    },
+    gridItem: {
+        marginTop: '20px',
+    },
+    ulElement: {
+        minWidth: '100%',
+    }
+}));
+
 export function QuestionAnswerList(props: StoreProps) {
-    const useStyles = makeStyles((theme) => ({
-        heading: {
-            fontSize: theme.typography.pxToRem(15),
-            flexBasis: '85.55%',
-            flexShrink: 0,
-            [theme.breakpoints.up('sm')]: {
-                flexBasis: '75.55%',
-            },
-        },
-        secondaryHeading: {
-            fontSize: theme.typography.pxToRem(15),
-            color: theme.palette.text.secondary,
-        },
-        textHidden : {
-            [theme.breakpoints.down('xs')]: {
-                display: 'none',
-            },
-        },
-        accordionItem: {
-            marginTop: '20px',
-        },
-        gridItem: {
-            marginTop: '20px',
-        },
-        ulElement: {
-            minWidth: '100%',
-        }
-    }));
     const classes = useStyles();
 
     return (

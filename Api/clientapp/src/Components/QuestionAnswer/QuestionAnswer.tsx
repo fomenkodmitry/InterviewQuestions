@@ -11,21 +11,22 @@ import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
 import {StoreProps} from "../../Type/Props";
 import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 
+const useStyles = makeStyles((theme) => ({
+    cardGrid: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(8),
+        flexGrow: 1,
+        paddingLeft: 1,
+    },
+    fab: {
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+    },
+}));
+
 //если export default, то не нужно использовать скобки
 function QuestionAnswer(props: StoreProps) {
-    const useStyles = makeStyles((theme) => ({
-        cardGrid: {
-            paddingTop: theme.spacing(1),
-            paddingBottom: theme.spacing(8),
-            flexGrow: 1,
-            paddingLeft: 1,
-        },
-        fab: {
-            position: 'fixed',
-            bottom: theme.spacing(2),
-            right: theme.spacing(2),
-        },
-    }));
 
     const classes = useStyles();
     const dispatch = useAppDispatch()

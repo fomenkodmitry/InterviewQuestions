@@ -45,6 +45,15 @@ function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
+const useStyles = makeStyles((theme) => ({
+    Form: {
+        padding: 16,
+        margin: 'auto',
+        maxWidth: 600,
+        paddingTop: theme.spacing(6),
+    }
+}));
+
 function QuestionCreate(props : StoreProps) {
 
     const formFields: FieldsList = [
@@ -69,15 +78,6 @@ function QuestionCreate(props : StoreProps) {
             ),
         },
     ];
-    
-    const useStyles = makeStyles((theme) => ({
-        Form: {
-            padding: 16,
-            margin: 'auto',
-            maxWidth: 600,
-            paddingTop: theme.spacing(6),
-        }
-    }));
 
     const classes = useStyles();
 
