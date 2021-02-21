@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Domain.Filter;
 
 namespace Domain.QuestionAnswer
 {
     public interface IQuestionAnswerService
     {
-        public IEnumerable<QuestionAnswerViewDto> Get(QuestionAnswerFilter programmingLanguage);
+        public FilteredItemsDto<QuestionAnswerViewDto> Get(QuestionAnswerFilter programmingLanguage);
         public Task<QuestionAnswerModel> Create(QuestionAnswerCreateDto model);
     }
 }

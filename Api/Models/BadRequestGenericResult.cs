@@ -1,4 +1,4 @@
-﻿﻿using Domain.Base;
+﻿using Domain.Base;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;

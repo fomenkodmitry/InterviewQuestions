@@ -6,7 +6,9 @@ export interface QuestionAnswerType {
     tagIds: string[]
 }
 
-export type QuestionAnswerTypeList = QuestionAnswerType[]
+export type QuestionAnswerTypeList = {
+    items : QuestionAnswerType[]
+}
 
 
 export interface QuestionCreateType
@@ -20,4 +22,8 @@ export interface QuestionFilterType
 {
     tagIds?: string[]
     searchText?: string
+    paging?: {
+        itemsCount?: number,
+        pagesCount?: number
+    }
 }

@@ -40,7 +40,7 @@ export function QuestionAnswerList(props: StoreProps) {
     const classes = useStyles();
     return (
         <ul className={classes.ulElement}>
-            {props?.questionAnswers?.map(item => (
+            {props?.questionAnswers?.items.map(item => (
                 <Grid item xs={12} key={item.id} className={classes.gridItem}>
                     <Accordion className={classes.accordionItem}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon/>}>

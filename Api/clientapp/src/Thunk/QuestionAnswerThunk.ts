@@ -4,25 +4,22 @@ import {BASE_URL} from "../Const/Const";
 //просто запрос асинхронный
 
 const serialize = function(obj? : QuestionFilterType) {
-    if(obj == undefined)
-        return "";
-
-    const searchParams = new URLSearchParams();
-    Object.keys(obj).forEach(key => {
-        // @ts-ignore
-        if(obj[key] != undefined)
-        {
-            if(key == 'tagIds') {
-                // @ts-ignore
-                obj[key].forEach(val => searchParams.append(key, val))
-                // @ts-ignore
-                return;
-            }
-            // @ts-ignore
-            searchParams.append(key, obj[key])
+    let stringArray : string[] = []
+    if(obj?.tagIds) {
+        obj.tagIds.forEach(item => stringArray.push(`tagIds=${item}`))
+    }
+    if(obj?.searchText) {
+        stringArray.push(`searchText=${obj.searchText}`)        
+    }
+    if(obj?.paging) {
+        if(obj?.paging?.itemsCount) {
+            stringArray.push(`paging.itemsCount=${obj.paging.itemsCount}`)
         }
-    })
-    return searchParams.toString()
+        if(obj?.paging?.pagesCount) {
+            stringArray.push(`paging.pagesCount=${obj.paging.pagesCount}`)
+        }
+    }
+    return stringArray.join("&")
 }
 
 export const fetchQuestionAnswerThunk = createAsyncThunk(

@@ -1,9 +1,9 @@
-﻿﻿using Domain.Base;
+﻿using Domain.Base;
 using System.Collections.Generic;
 
 namespace Domain.Filter
 {
-    public class FilteredItemsDto<T> where T: BaseModel
+    public class FilteredItemsDto<T> where T : class, IModel
     {
         /// <summary>
         /// Отфильтрованные элементы с учетом пагинации (текущая страница)

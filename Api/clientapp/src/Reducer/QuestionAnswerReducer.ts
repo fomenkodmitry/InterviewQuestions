@@ -4,7 +4,7 @@ import {QuestionAnswerTypeList} from "../Type/QuestionAnswerType";
 import {fetchQuestionAnswerThunk} from "../Thunk/QuestionAnswerThunk";
 import {createQuestionThunk} from "../Thunk/CreateQuestionThunk";
 
-const initialState : QuestionAnswerTypeList = []
+const initialState : QuestionAnswerTypeList = {items: []}
 
 export const questionAnswerReducer = createReducer(
     initialState,
@@ -16,7 +16,7 @@ export const questionAnswerReducer = createReducer(
                 return state;
             })
             .addCase(createQuestionThunk.fulfilled, (state, action) => {
-                state.concat(action.payload)
+                state.items.concat(action.payload)
                 return state;
             })
     }

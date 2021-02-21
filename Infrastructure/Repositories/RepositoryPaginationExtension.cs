@@ -9,7 +9,7 @@ namespace Infrastructure.Repositories
         public static IQueryable<TEntity> ApplyPaging<TEntity>(this IQueryable<TEntity> source, FilterPagingDto paging) where TEntity : BaseModel
         {
             // get from config
-            paging ??= new FilterPagingDto {PageSize = 10};
+            paging ??= new FilterPagingDto {PageSize = 20};
             return source
                 .Skip(paging.PageNumber * paging.PageSize)
                 .Take(paging.PageSize);
