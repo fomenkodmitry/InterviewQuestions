@@ -10,6 +10,7 @@ import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 import {changeTagIdsAction, getTagIdsAction} from "../../Reducer/ValueReducer";
 import {Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, Select} from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
+import {questionAnswerClearState} from "../../Reducer/QuestionAnswerReducer";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +38,7 @@ function FadeMenu(props: StoreProps) {
 
     //update store onlick
     const getQuestions = (filter? : QuestionFilterType) => {
+        dispatch(questionAnswerClearState())
         dispatch(fetchQuestionAnswerThunk(filter))
         dispatch(changeTagIdsAction(filter?.tagIds))
     };

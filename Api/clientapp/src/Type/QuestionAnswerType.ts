@@ -7,23 +7,22 @@ export interface QuestionAnswerType {
 }
 
 export type QuestionAnswerTypeList = {
-    items : QuestionAnswerType[]
+    items: QuestionAnswerType[],
+    paging: { itemsCount: number, pagesCount: number, currentPage: number}
 }
 
 
-export interface QuestionCreateType
-{
+export interface QuestionCreateType {
     question: string
     answer: string
     tagIds: string[]
 }
 
-export interface QuestionFilterType
-{
+export interface QuestionFilterType {
     tagIds?: string[]
     searchText?: string
     paging?: {
-        itemsCount?: number,
-        pagesCount?: number
-    }
+        pageNumber?: number,
+        pageSize?: number
+    },
 }

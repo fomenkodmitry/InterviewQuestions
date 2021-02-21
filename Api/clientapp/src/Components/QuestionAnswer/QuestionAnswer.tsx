@@ -2,14 +2,12 @@
 import {Fab, Grid} from "@material-ui/core";
 import {Container} from "@material-ui/core";
 import React, {useEffect} from "react";
-import {QuestionAnswerList} from "./QuestionAnswerList";
 import {useAppDispatch} from "../../Store/Store";
-import {connect} from "react-redux";
 import AddIcon from '@material-ui/icons/Add';
 import {useHistory} from "react-router-dom";
 import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
-import {StoreProps} from "../../Type/Props";
 import {QuestionFilterType} from "../../Type/QuestionAnswerType";
+import QuestionAnswerList from "./QuestionAnswerList";
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -26,18 +24,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //если export default, то не нужно использовать скобки
-function QuestionAnswer(props: StoreProps) {
+export default function QuestionAnswer() {
 
     const classes = useStyles();
-    const dispatch = useAppDispatch()
-
-    const getQuestions = (filter? : QuestionFilterType) => {
-        dispatch(fetchQuestionAnswerThunk(filter))
-    };
-    //заполняем стор первичными данными с помощью хука для сайд действий
-    useEffect(() => {
-        getQuestions()
-    }, []);
 
     //истрия переходов + редирект
     let history = useHistory();
@@ -49,7 +38,7 @@ function QuestionAnswer(props: StoreProps) {
     return (
         <Container className={classes.cardGrid}>
             <Grid container>
-                <QuestionAnswerList {...props}/>
+                <QuestionAnswerList/>
             </Grid>
             <Fab color="secondary" className={classes.fab} onClick={create}>
                 <AddIcon/>
@@ -57,13 +46,3 @@ function QuestionAnswer(props: StoreProps) {
         </Container>
     );
 }
-
-
-//можно получать уже готовые стейты
-const mapStateToProps = (state: StoreProps) => ({
-    tags: state.tags,
-    questionAnswers: state.questionAnswers
-})
-
-// подключение компонента к стору
-export default connect(mapStateToProps)(QuestionAnswer)

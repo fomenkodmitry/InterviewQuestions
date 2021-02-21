@@ -11,7 +11,7 @@ namespace Infrastructure.Repositories
             // get from config
             paging ??= new FilterPagingDto {PageSize = 20};
             return source
-                .Skip(paging.PageNumber * paging.PageSize)
+                .Skip((paging.PageNumber - 1) * paging.PageSize)
                 .Take(paging.PageSize);
         }
     }

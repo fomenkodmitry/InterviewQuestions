@@ -12,11 +12,11 @@ const serialize = function(obj? : QuestionFilterType) {
         stringArray.push(`searchText=${obj.searchText}`)        
     }
     if(obj?.paging) {
-        if(obj?.paging?.itemsCount) {
-            stringArray.push(`paging.itemsCount=${obj.paging.itemsCount}`)
+        if(obj?.paging?.pageNumber) {
+            stringArray.push(`paging.pageNumber=${obj.paging.pageNumber}`)
         }
-        if(obj?.paging?.pagesCount) {
-            stringArray.push(`paging.pagesCount=${obj.paging.pagesCount}`)
+        if(obj?.paging?.pageSize) {
+            stringArray.push(`paging.pageSize=${obj.paging.pageSize}`)
         }
     }
     return stringArray.join("&")
@@ -29,3 +29,5 @@ export const fetchQuestionAnswerThunk = createAsyncThunk(
         return (await response.json()) as QuestionAnswerTypeList
     }
 )
+
+

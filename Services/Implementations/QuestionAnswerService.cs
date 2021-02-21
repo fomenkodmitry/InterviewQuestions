@@ -44,7 +44,7 @@ namespace Services.Implementations
             return new FilteredItemsDto<QuestionAnswerViewDto>()
             {
                 Items = query.ApplyPaging(filter.Paging).ProjectTo<QuestionAnswerViewDto>(_mapper.ConfigurationProvider),
-                Paging = new FilteredItemsCountDto(query.Count(), filter.Paging?.PageSize ?? 20)
+                Paging = new FilteredItemsCountDto(query.Count(), filter.Paging?.PageSize ?? 20, filter?.Paging?.PageNumber ?? 1)
             };
         }
 

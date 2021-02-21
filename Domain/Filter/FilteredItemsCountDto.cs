@@ -7,9 +7,10 @@ namespace Domain.Filter
     /// </summary>
     public class FilteredItemsCountDto
     {
-        public FilteredItemsCountDto(int itemsCount, int pageSize)
+        public FilteredItemsCountDto(int itemsCount, int pageSize, int currentPage = 1)
         {
             ItemsCount = itemsCount;
+            CurrentPage = currentPage;
             PagesCount = Convert.ToInt32(Math.Ceiling((decimal)itemsCount / (decimal)pageSize));
         }
 
@@ -21,5 +22,8 @@ namespace Domain.Filter
         /// Количество страниц в соответствии с заданным пейджингом
         /// </summary>
         public int PagesCount { get; set; }
+
+        public int CurrentPage { get; set; }
+
     }
 }

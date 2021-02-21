@@ -8,10 +8,10 @@
         /// <summary>
         /// Номер страницы, начиная с нуля
         /// </summary>
-        public int PageNumber { get; set; }
+        public int PageNumber { get; set; } = 1;
         /// <summary>
-        /// Размер страницы, по умолчанию - 10
+        /// Размер страницы, по умолчанию - 20
         /// </summary>
-        public int PageSize { get; set; } = 10;
+        public int PageSize { get; set; } = 20;
     }
 }

@@ -8,6 +8,7 @@ import React, {useEffect} from "react";
 import {changeSearchTextAction, getTagIdsAction, getSearchTextAction} from "../../Reducer/ValueReducer";
 import {StoreProps} from "../../Type/Props";
 import {connect} from "react-redux";
+import {questionAnswerClearState} from "../../Reducer/QuestionAnswerReducer";
 
 const useStyles = makeStyles((theme) => ({
     search: {
@@ -58,6 +59,7 @@ function Search(props : StoreProps) {
     
     const dispatch = useAppDispatch()
     const getQuestions = (filter? : QuestionFilterType) => {
+        dispatch(questionAnswerClearState())
         dispatch(fetchQuestionAnswerThunk(filter))
     };
     const getProgrammingLanguageId = () => {
