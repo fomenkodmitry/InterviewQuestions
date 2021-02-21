@@ -4,7 +4,7 @@ import {QuestionAnswerTypeList} from "../Type/QuestionAnswerType";
 import {fetchQuestionAnswerThunk} from "../Thunk/QuestionAnswerThunk";
 import {createQuestionThunk} from "../Thunk/CreateQuestionThunk";
 
-
+//обнуление стейта с помощью экшена, да-да
 export const questionAnswerClearState = createAction<string | undefined>('fetchQuestionAnswerThunk/clearState')
 
 const initialState : QuestionAnswerTypeList = {paging: {itemsCount: 0, pagesCount: 0, currentPage : 1}, items: []}
