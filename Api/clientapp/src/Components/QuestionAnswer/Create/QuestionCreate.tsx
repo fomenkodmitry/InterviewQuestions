@@ -75,7 +75,6 @@ function QuestionCreate(props: StoreProps) {
     const createQuestion = (value: QuestionCreateType) => {
         dispatch(createQuestionThunk(value))
             .then(res => {
-                console.log(res)
                 if (typeof res.payload != 'number') {
                     return handleVariant('success')
                 } else {
