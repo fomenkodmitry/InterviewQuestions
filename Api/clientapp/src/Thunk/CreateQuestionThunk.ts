@@ -4,7 +4,7 @@ import {BASE_URL} from "../Const/Const";
 //просто запрос асинхронный
 export const createQuestionThunk = createAsyncThunk(
     'CreateQuestion',
-    async (data: QuestionCreateType) => {
+    async (data: QuestionCreateType, {rejectWithValue}) => {
         const response = await fetch(`${BASE_URL}/QuestionAnswer`, {
             method: "POST",
             body: JSON.stringify(data),
@@ -12,6 +12,9 @@ export const createQuestionThunk = createAsyncThunk(
                 'Content-Type': 'application/json'
             },
         })
+        if(response.status != 200) {
+            return rejectWithValue(response.status)
+        }
         return (await response.json()) as QuestionAnswerType
     }
 )

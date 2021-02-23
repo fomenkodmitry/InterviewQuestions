@@ -6,15 +6,18 @@ import {Provider} from "react-redux";
 import {store} from "./Store/Store";
 import {Pages} from "./Components/Route/Pages";
 import {Header} from "./Components/Header/Header";
+import {SnackbarProvider} from "notistack";
 
 function App() {
     return (
         <Provider store={store}>
-            <React.Fragment>
-                <CssBaseline/>
-                <Header/>
-                <Pages/>
-            </React.Fragment>
+            <SnackbarProvider maxSnack={3}>
+                <React.Fragment>
+                    <CssBaseline/>
+                    <Header/>
+                    <Pages/>
+                </React.Fragment>
+            </SnackbarProvider>
         </Provider>
     );
 }

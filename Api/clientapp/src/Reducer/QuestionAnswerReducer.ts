@@ -27,7 +27,6 @@ export const questionAnswerReducer = createReducer(
                 }
             })
             .addCase(createQuestionThunk.fulfilled, (state, action) => {
-                state.items.concat(action.payload)
                 return state;
             })
             .addCase(questionAnswerClearState, (state, action) => {

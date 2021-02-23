@@ -1,15 +1,6 @@
 ﻿import {Form} from 'react-final-form';
-import {
-    TextField,
-    Select,
-} from 'mui-rff';
-import {
-    Paper,
-    Grid,
-    Button,
-    MenuItem, GridSize, Snackbar,
-} from '@material-ui/core';
-
+import {TextField, Select} from 'mui-rff';
+import {Paper, Grid, Button, MenuItem, GridSize} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 import React, {ReactElement, useEffect} from "react";
 import {createQuestionThunk} from "../../../Thunk/CreateQuestionThunk";
@@ -18,7 +9,8 @@ import {QuestionCreateType} from "../../../Type/QuestionAnswerType";
 import {connect} from "react-redux";
 import {StoreProps} from "../../../Type/Props";
 import {fetchTagsThunk} from "../../../Thunk/TagsThunk";
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import {unwrapResult} from "@reduxjs/toolkit";
+import {useSnackbar, VariantType} from "notistack";
 
 const validate = (values: QuestionCreateType) => {
     const errors: any = {};
@@ -41,10 +33,6 @@ interface Fields {
 
 type FieldsList = Fields[]
 
-function Alert(props: AlertProps) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 const useStyles = makeStyles((theme) => ({
     Form: {
         padding: 16,
@@ -54,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function QuestionCreate(props : StoreProps) {
+function QuestionCreate(props: StoreProps) {
 
     const formFields: FieldsList = [
         {
@@ -83,10 +71,19 @@ function QuestionCreate(props : StoreProps) {
     const classes = useStyles();
 
     const dispatch = useAppDispatch()
-
-    const createQuestion = (value : QuestionCreateType) => {
-        dispatch(createQuestionThunk(value)).then(() => handleClick())
-    };
+    //ToDo отрефакторить обработку ошибок и вынести её глобально
+    const createQuestion = (value: QuestionCreateType) => {
+        dispatch(createQuestionThunk(value))
+            .then(res => {
+                console.log(res)
+                if (typeof res.payload != 'number') {
+                    return handleVariant('success')
+                } else {
+                    return handleVariant('error')
+                }
+            })
+    }
+    
     const getLanguages = () => {
         dispatch(fetchTagsThunk())
     };
@@ -95,19 +92,16 @@ function QuestionCreate(props : StoreProps) {
         getLanguages()
     }, [])
 
-    const [open, setOpen] = React.useState(false);
+    const {enqueueSnackbar} = useSnackbar();
 
-    const handleClick = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
+    const handleVariant = (variant: VariantType) => {
+        if (variant == 'success') {
+            enqueueSnackbar('This is a success message!', {variant});
+        } else {
+            enqueueSnackbar('Error!', {variant});
         }
-        setOpen(false);
     };
-    
+
     return (
         <div className={classes.Form}>
             <Form
@@ -123,7 +117,7 @@ function QuestionCreate(props : StoreProps) {
                                         {item.field}
                                     </Grid>
                                 ))}
-                                <Grid key={"button"} item style={{ marginTop: 16 }}>
+                                <Grid key={"button"} item style={{marginTop: 16}}>
                                     <Button
                                         type="button"
                                         variant="contained"
@@ -147,18 +141,13 @@ function QuestionCreate(props : StoreProps) {
                         </Paper>
                     </form>
                 )}
-             />
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success">
-                    Question creation successful!
-                </Alert>
-            </Snackbar>
+            />
         </div>
     );
 }
 
 const mapStateToProps = (state: StoreProps) => ({
-    tags: state.tags,
+    tags: state.tags
 })
 
 // подключение компонента к стору
