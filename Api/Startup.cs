@@ -143,6 +143,7 @@ namespace Api
             builder.RegisterType<TokenService>().As<ITokenService>();
             builder.RegisterType<TokenService>().As<ITokenService>();
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
+            builder.RegisterType<TagService>().As<ITagService>();
             builder.RegisterType<CryptoHelper>();
 
             builder.RegisterType<ScheduleTask>().As<IHostedService>().SingleInstance();

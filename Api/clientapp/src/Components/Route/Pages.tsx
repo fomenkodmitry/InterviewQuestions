@@ -2,6 +2,7 @@
 import QuestionCreate from "../QuestionAnswer/Create/QuestionCreate";
 import React from "react";
 import QuestionAnswer from "../QuestionAnswer/QuestionAnswer";
+import Auth from "../Auth/Auth";
 
 export function Pages() {
     return (
@@ -11,6 +12,9 @@ export function Pages() {
             </Route>
             <Route path="/question-create">
                 <QuestionCreate/>
+            </Route>
+            <Route path="/auth">
+                <Auth/>
             </Route>
         </Switch>
     )

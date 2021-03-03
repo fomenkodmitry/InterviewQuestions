@@ -10,8 +10,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {useAppDispatch} from "../../Store/Store";
-import {QuestionAnswerTypeList, QuestionFilterType} from "../../Type/QuestionAnswerType";
+import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
+import {questionAnswerClearState} from "../../Action/QuestionAnswerAction";
 
 const useStyles = makeStyles((theme) => ({
     heading: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function QuestionAnswerList(props: StoreProps) {
+function QuestionAnswerList(props?: StoreProps) {
 
     const dispatch = useAppDispatch()
 
@@ -52,6 +53,7 @@ function QuestionAnswerList(props: StoreProps) {
 
     //заполняем стор первичными данными с помощью хука
     useEffect(() => {
+        dispatch(questionAnswerClearState())
         getQuestions()
     }, []);
 
@@ -64,8 +66,8 @@ function QuestionAnswerList(props: StoreProps) {
             pageNumber = props.questionAnswers.paging.currentPage + 1
         }
         const filter: QuestionFilterType = {
-            searchText: props.values?.searchText,
-            tagIds: props.values?.tagIds,
+            searchText: props?.values?.searchText,
+            tagIds: props?.values?.tagIds,
             paging: {
                 pageNumber: pageNumber,
                 pageSize: 20

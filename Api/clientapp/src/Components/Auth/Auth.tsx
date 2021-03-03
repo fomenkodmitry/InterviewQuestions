@@ -1,25 +1,23 @@
 ﻿import {Form} from 'react-final-form';
-import {TextField, Select} from 'mui-rff';
+import {TextField} from 'mui-rff';
 import {Paper, Grid, Button, MenuItem, GridSize} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 import React, {ReactElement, useEffect} from "react";
-import {createQuestionThunk} from "../../../Thunk/CreateQuestionThunk";
-import {useAppDispatch} from "../../../Store/Store";
-import {QuestionCreateType} from "../../../Type/QuestionAnswerType";
-import {connect} from "react-redux";
-import {StoreProps} from "../../../Type/Props";
-import {fetchTagsThunk} from "../../../Thunk/TagsThunk";
 import {useSnackbar, VariantType} from "notistack";
+import {useAppDispatch} from "../../Store/Store";
+import {StoreProps} from "../../Type/Props";
+import {LoginType, TokenType} from "../../Type/AuthType";
+import {authThunk} from "../../Thunk/AuthThunk";
+import {connect} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {setIsAuthAction} from "../../Action/ValueAction";
 
-const validate = (values: QuestionCreateType) => {
+const validate = (values: LoginType) => {
     const errors: any = {};
-    if (!values.question) {
+    if (!values.email) {
         errors.question = 'Required';
     }
-    if (!values.answer) {
-        errors.answer = 'Required';
-    }
-    if (!values.tagIds) {
+    if (!values.password) {
         errors.tagIds = 'Required';
     }
     return errors;
@@ -41,62 +39,50 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function QuestionCreate(props?: StoreProps) {
+function Auth(props?: StoreProps) {
 
     const formFields: FieldsList = [
         {
             size: 12,
-            field: <TextField name="question" multiline label="Question" margin="none"/>,
+            field: <TextField name="email" label="email" margin="none"/>,
         },
         {
             size: 12,
-            field: <TextField name="answer" multiline label="Answer" margin="none"/>,
-        },
-        {
-            size: 12,
-            field: (
-                <Select
-                    name="tagIds"
-                    label="Select a language"
-                    formControlProps={{margin: 'none'}}
-                    multiple
-                >
-                    {props?.tags?.map(item => (<MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>))}
-                </Select>
-            ),
-        },
+            field: <TextField name="password" type="password" label="Password" margin="none"/>,
+        }
     ];
 
     const classes = useStyles();
 
-    const dispatch = useAppDispatch()
-    //ToDo отрефакторить обработку ошибок и вынести её глобально
-    const createQuestion = (value: QuestionCreateType) => {
-        dispatch(createQuestionThunk(value))
-            .then(res => {
-                if (typeof res.payload != 'number') {
-                    return handleVariant('success')
-                } else {
-                    return handleVariant('error')
-                }
-            })
+    //истрия переходов + редирект
+    let history = useHistory();
+
+    function home() {
+        history.push("/");
     }
     
-    const getLanguages = () => {
-        dispatch(fetchTagsThunk())
-    };
-
-    useEffect(() => {
-        getLanguages()
-    }, [])
+    const dispatch = useAppDispatch()
+    //ToDo отрефакторить обработку ошибок и вынести её глобально
+    const createQuestion = (value: LoginType) => {
+        dispatch(authThunk(value))
+            .then(res => {
+                if (typeof res.payload != 'number') {
+                    const tokenRes = res.payload as TokenType;
+                    return handleVariant('success', tokenRes.authToken)
+                }
+                return handleVariant('error')
+            })
+    }
 
     const {enqueueSnackbar} = useSnackbar();
 
-    const handleVariant = (variant: VariantType) => {
+    const handleVariant = (variant: VariantType, token? : string) => {
         if (variant == 'success') {
             enqueueSnackbar('This is a success!', {variant});
+            dispatch(setIsAuthAction(true))
+            localStorage.token = token;
+            home()
         } else {
-            localStorage.token = null;
             enqueueSnackbar('Error!', {variant});
         }
     };
@@ -116,16 +102,6 @@ function QuestionCreate(props?: StoreProps) {
                                         {item.field}
                                     </Grid>
                                 ))}
-                                <Grid key={"button"} item style={{marginTop: 16}}>
-                                    <Button
-                                        type="button"
-                                        variant="contained"
-                                        onClick={() => form.reset()}
-                                        disabled={submitting || pristine}
-                                    >
-                                        Reset
-                                    </Button>
-                                </Grid>
                                 <Grid key={"submit"} item style={{marginTop: 16}}>
                                     <Button
                                         variant="contained"
@@ -146,8 +122,8 @@ function QuestionCreate(props?: StoreProps) {
 }
 
 const mapStateToProps = (state: StoreProps) => ({
-    tags: state.tags
+    values: state.values
 })
 
 // подключение компонента к стору
-export default connect(mapStateToProps)(QuestionCreate)
+export default connect(mapStateToProps)(Auth)

@@ -7,10 +7,10 @@ import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
 import {connect} from "react-redux";
 import {StoreProps} from "../../Type/Props";
 import {QuestionFilterType} from "../../Type/QuestionAnswerType";
-import {changeTagIdsAction, getTagIdsAction} from "../../Reducer/ValueReducer";
 import {Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, Select} from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
-import {questionAnswerClearState} from "../../Reducer/QuestionAnswerReducer";
+import {questionAnswerClearState} from "../../Action/QuestionAnswerAction";
+import {setTagIdsAction} from "../../Action/ValueAction";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,10 +37,10 @@ function FadeMenu(props: StoreProps) {
     const dispatch = useAppDispatch()
 
     //update store onlick
-    const getQuestions = (filter? : QuestionFilterType) => {
+    const getQuestions = (filter : QuestionFilterType) => {
         dispatch(questionAnswerClearState())
         dispatch(fetchQuestionAnswerThunk(filter))
-        dispatch(changeTagIdsAction(filter?.tagIds))
+        dispatch(setTagIdsAction(filter?.tagIds ?? []))
     };
 
     const getLanguages = () => {

@@ -9,7 +9,8 @@ export const createQuestionThunk = createAsyncThunk(
             method: "POST",
             body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.token}`
             },
         })
         if(response.status != 200) {

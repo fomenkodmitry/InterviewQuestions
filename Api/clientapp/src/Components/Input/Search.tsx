@@ -5,10 +5,10 @@ import {QuestionFilterType} from "../../Type/QuestionAnswerType";
 import {fetchQuestionAnswerThunk} from "../../Thunk/QuestionAnswerThunk";
 import {useAppDispatch} from "../../Store/Store";
 import React, {useEffect} from "react";
-import {changeSearchTextAction, getTagIdsAction, getSearchTextAction} from "../../Reducer/ValueReducer";
 import {StoreProps} from "../../Type/Props";
 import {connect} from "react-redux";
-import {questionAnswerClearState} from "../../Reducer/QuestionAnswerReducer";
+import {questionAnswerClearState} from "../../Action/QuestionAnswerAction";
+import {setSearchTextAction, getSearchTextAction, getTagIdsAction} from "../../Action/ValueAction";
 
 const useStyles = makeStyles((theme) => ({
     search: {
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-function Search(props : StoreProps) {
+function Search(props? : StoreProps) {
 
     const classes = useStyles()
     
@@ -67,7 +67,7 @@ function Search(props : StoreProps) {
     };
 
     const setSearchText = (value? : string) => {
-        dispatch(changeSearchTextAction(value))
+        dispatch(setSearchTextAction(value))
     };
     const getSearchText = () => {
         dispatch(getSearchTextAction())
@@ -91,7 +91,7 @@ function Search(props : StoreProps) {
             getProgrammingLanguageId()
             const filter : QuestionFilterType = {
                 searchText : e.target.value,
-                tagIds : props.values?.tagIds
+                tagIds : props?.values?.tagIds
             }
             setSearchText(e.target.value)
             getQuestions(filter)

@@ -5,8 +5,8 @@ import {CssBaseline, Grid} from "@material-ui/core";
 import {Provider} from "react-redux";
 import {store} from "./Store/Store";
 import {Pages} from "./Components/Route/Pages";
-import {Header} from "./Components/Header/Header";
 import {SnackbarProvider} from "notistack";
+import Header from "./Components/Header/Header";
 
 function App() {
     return (

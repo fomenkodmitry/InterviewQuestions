@@ -3,7 +3,7 @@ import {ValueType} from "./ValueType";
 import {TagsTypeList} from "./TagsType";
 
 export interface StoreProps {
-    tags?: TagsTypeList
-    questionAnswers?: QuestionAnswerTypeList
-    values?: ValueType
+    tags: TagsTypeList
+    questionAnswers: QuestionAnswerTypeList
+    values: ValueType
 }
