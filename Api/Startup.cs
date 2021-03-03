@@ -20,9 +20,13 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Autofac;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
+using Domain.Authenticate;
 using Domain.DomainToModelProfile;
 using Domain.QuestionAnswer;
 using Domain.Tag;
+using Domain.Token;
+using Domain.User;
+using Infrastructure.Crypto;
 
 namespace Api
 {
@@ -135,7 +139,11 @@ namespace Api
                 .SingleInstance();
 
             builder.RegisterType<QuestionAnswerService>().As<IQuestionAnswerService>();
-            builder.RegisterType<TagService>().As<ITagService>();
+            builder.RegisterType<UserService>().As<IUserService>();
+            builder.RegisterType<TokenService>().As<ITokenService>();
+            builder.RegisterType<TokenService>().As<ITokenService>();
+            builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
+            builder.RegisterType<CryptoHelper>();
 
             builder.RegisterType<ScheduleTask>().As<IHostedService>().SingleInstance();
 

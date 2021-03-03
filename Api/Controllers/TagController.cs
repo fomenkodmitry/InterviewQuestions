@@ -2,6 +2,7 @@
 using Api.Controllers.Base;
 using Domain.Tag;
 using Domain.QuestionAnswer;
+using Domain.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,12 +17,13 @@ namespace Api.Controllers
     public class TagController : BaseController
     {
         private readonly ITagService _tagService;
-        
+
         /// <summary>
         /// DI
         /// </summary>
         /// <param name="tagService"></param>
-        public TagController(ITagService tagService) : base()
+        /// <param name="userService"></param>
+        public TagController(ITagService tagService, IUserService userService) : base(userService)
         {
             _tagService = tagService;
         }

@@ -5,6 +5,7 @@ using AutoMapper;
 using Domain.Base;
 using Domain.Error;
 using Domain.Filter;
+using Domain.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -25,10 +26,8 @@ namespace Api.Controllers.Base
         /// DI ctor
         /// </summary>
         /// <param name="userService"></param>
-        /// <param name="mapper"></param>
-        protected BaseApiController(IMapper mapper) : base ()
+        protected BaseApiController(IUserService userService) : base (userService)
         {
-            Mapper = mapper;
         }
 
         private IMapper Mapper { get; }
@@ -157,25 +156,6 @@ namespace Api.Controllers.Base
         {
             ModelState.Clear();
         }
-
-        protected FilterPagingDto GetPaging()
-        {
-            return Request.Query.ContainsKey("pageNumber") ?
-                new FilterPagingDto
-                {
-                    PageNumber = int.TryParse(Request.Query["pageNumber"].ToString(), out var pageNumber) ? pageNumber : 0,
-                    PageSize = int.TryParse(Request.Query["pageSize"].ToString(), out var pageSize) ? pageSize : 0
-                } : null;
-        }
-
-        protected FilterSortDto GetSort()
-        {
-            return Request.Query.ContainsKey("sortColumn") ?
-                new FilterSortDto
-                {
-                    ColumnName = Request.Query["sortColumn"].ToString(),
-                    IsDescending = bool.TryParse(Request.Query["descending"].ToString(), out var descending) && descending
-                } : null;
-        }
+        
     }
 }

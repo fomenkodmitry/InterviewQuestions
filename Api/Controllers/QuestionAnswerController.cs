@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Api.Controllers.Base;
 using Domain.QuestionAnswer;
+using Domain.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,17 +12,18 @@ namespace Api.Controllers
     /// Question answer controller
     /// </summary>
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     [Route("api/[controller]")]
     public class QuestionAnswerController : BaseController
     {
         private readonly IQuestionAnswerService _questionAnswerService;
-        
+
         /// <summary>
         /// DI
         /// </summary>
         /// <param name="questionAnswerService"></param>
-        public QuestionAnswerController(IQuestionAnswerService questionAnswerService) : base()
+        /// <param name="userService"></param>
+        public QuestionAnswerController(IQuestionAnswerService questionAnswerService, IUserService userService) : base(userService)
         {
             _questionAnswerService = questionAnswerService;
         }
@@ -31,6 +33,7 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<QuestionAnswerViewDto>> Get([FromQuery] QuestionAnswerFilter filter)
         {
             return Ok(_questionAnswerService.Get(filter));
@@ -43,7 +46,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<ActionResult<QuestionAnswerModel>> Create(QuestionAnswerCreateDto model)
         {
-            return Ok(await _questionAnswerService.Create(model));
+            return ProcessResult(await _questionAnswerService.Create(model));
         }
     }
 }

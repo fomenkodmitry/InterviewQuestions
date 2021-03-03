@@ -1,5 +1,7 @@
 ﻿using Domain.QuestionAnswer;
 using Domain.Tag;
+using Domain.Token;
+using Domain.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts
@@ -13,6 +15,8 @@ namespace Infrastructure.Contexts
         public DbSet<QuestionAnswerModel> QuestionAnswers { get; set; }
         public DbSet<TagModel> Tags { get; set; }
         public DbSet<QuestionAnswerToTagModel> QuestionAnswerToTags { get; set; }
+        public DbSet<UserModel> Users { get; set; }
+        public DbSet<TokenModel> Tokens { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

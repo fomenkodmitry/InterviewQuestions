@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Domain.Base;
 using Domain.Filter;
 using Domain.QuestionAnswer;
 using Domain.Tag;
+using Domain.User;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,14 +45,14 @@ namespace Services.Implementations
             
             return new FilteredItemsDto<QuestionAnswerViewDto>()
             {
-                Items = query.ApplyPaging(filter.Paging).ProjectTo<QuestionAnswerViewDto>(_mapper.ConfigurationProvider),
+                Items = query.OrderByDescending(p => p.DateCreated).ApplyPaging(filter.Paging).ProjectTo<QuestionAnswerViewDto>(_mapper.ConfigurationProvider),
                 Paging = new FilteredItemsCountDto(query.Count(), filter.Paging?.PageSize ?? 20, filter?.Paging?.PageNumber ?? 1)
             };
         }
 
-        public async Task<QuestionAnswerModel> Create(QuestionAnswerCreateDto model)
+        public async Task<ResultContainer<QuestionAnswerModel>> Create(QuestionAnswerCreateDto model)
         {
-            return await _genericRepository.Create(new QuestionAnswerModel()
+            return new(await _genericRepository.Create(new QuestionAnswerModel()
             {
                 Question = model.Question,
                 Answer = model.Answer,
@@ -60,7 +62,7 @@ namespace Services.Implementations
                 {
                     TagId = p,
                 }).ToList()
-            });
+            }));
         }
     }
 }

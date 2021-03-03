@@ -4,6 +4,31 @@
         <name>Api</name>
     </assembly>
     <members>
+        <member name="T:Api.Controllers.AuthController">
+            <summary>
+            Login user
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.AuthController.#ctor(Domain.Authenticate.IAuthenticationService,Domain.User.IUserService)">
+            <summary>
+            DI ctor
+            </summary>
+            <param name="authenticateService"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Api.Controllers.AuthController.Login(Domain.Authenticate.UserLoginRequestDto)">
+            <summary>
+            User login
+            </summary>
+            <param name="requestDto" class="UserLoginRequestDto"></param>
+            <returns class="UserLoginResponseDto">UserLoginResponseDto</returns>
+        </member>
+        <member name="M:Api.Controllers.AuthController.Logout">
+            <summary>
+            Logout
+            </summary>
+            <returns>200 OK</returns>
+        </member>
         <member name="T:Api.Controllers.Base.BaseApiController`2">
             <summary>
             Base Api class
@@ -11,12 +36,11 @@
             <typeparam name="T"></typeparam>
             <typeparam name="TFilter"></typeparam>
         </member>
-        <member name="M:Api.Controllers.Base.BaseApiController`2.#ctor(AutoMapper.IMapper)">
+        <member name="M:Api.Controllers.Base.BaseApiController`2.#ctor(Domain.User.IUserService)">
             <summary>
             DI ctor
             </summary>
             <param name="userService"></param>
-            <param name="mapper"></param>
         </member>
         <member name="M:Api.Controllers.Base.BaseApiController`2.Get(`1)">
             <summary>
@@ -79,11 +103,12 @@
             Question answer controller
             </summary>
         </member>
-        <member name="M:Api.Controllers.QuestionAnswerController.#ctor(Domain.QuestionAnswer.IQuestionAnswerService)">
+        <member name="M:Api.Controllers.QuestionAnswerController.#ctor(Domain.QuestionAnswer.IQuestionAnswerService,Domain.User.IUserService)">
             <summary>
             DI
             </summary>
             <param name="questionAnswerService"></param>
+            <param name="userService"></param>
         </member>
         <member name="M:Api.Controllers.QuestionAnswerController.Get(Domain.QuestionAnswer.QuestionAnswerFilter)">
             <summary>
@@ -102,11 +127,12 @@
             Tags
             </summary>
         </member>
-        <member name="M:Api.Controllers.TagController.#ctor(Domain.Tag.ITagService)">
+        <member name="M:Api.Controllers.TagController.#ctor(Domain.Tag.ITagService,Domain.User.IUserService)">
             <summary>
             DI
             </summary>
             <param name="tagService"></param>
+            <param name="userService"></param>
         </member>
         <member name="M:Api.Controllers.TagController.Get">
             <summary>
