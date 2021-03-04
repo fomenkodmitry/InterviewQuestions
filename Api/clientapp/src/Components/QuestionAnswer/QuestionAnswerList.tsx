@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     },
     accordionItem: {
         marginTop: '20px',
-        width: '95%'
+        width: '95%',
+        whiteSpace: 'pre-line'
     },
     gridItem: {
         marginTop: '20px',
@@ -101,7 +102,7 @@ function QuestionAnswerList(props?: StoreProps) {
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>{item.answer.replace('\n', '<br/>')}</Typography>
+                                <Typography>{item.answer}</Typography>
                             </AccordionDetails>
                         </Accordion>
                     </Grid>
