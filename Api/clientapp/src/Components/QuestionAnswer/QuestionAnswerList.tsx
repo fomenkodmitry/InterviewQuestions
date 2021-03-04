@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
     accordionItem: {
         marginTop: '20px',
+        width: '95%'
     },
     gridItem: {
         marginTop: '20px',
