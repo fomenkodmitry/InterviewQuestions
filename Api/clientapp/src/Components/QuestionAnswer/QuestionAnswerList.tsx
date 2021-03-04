@@ -100,7 +100,7 @@ function QuestionAnswerList(props?: StoreProps) {
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>{item.answer}</Typography>
+                                <Typography>{item.answer.replace('\n', '<br/>')}</Typography>
                             </AccordionDetails>
                         </Accordion>
                     </Grid>

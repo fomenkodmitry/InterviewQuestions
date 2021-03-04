@@ -96,7 +96,7 @@ function QuestionCreate(props?: StoreProps) {
         if (variant == 'success') {
             enqueueSnackbar('This is a success!', {variant});
         } else {
-            localStorage.token = null;
+            localStorage.clear();
             enqueueSnackbar('Error!', {variant});
         }
     };

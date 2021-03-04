@@ -43,4 +43,9 @@
       <Folder Include="ClientApp" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="clientapp\build\asset-manifest.json" />
+      <_ContentIncludedByDefault Remove="clientapp\build\manifest.json" />
+    </ItemGroup>
+
 </Project>
