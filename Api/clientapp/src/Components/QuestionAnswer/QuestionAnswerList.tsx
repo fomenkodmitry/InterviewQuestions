@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
     accordionItem: {
         marginTop: '20px',
         width: '95%',
-        whiteSpace: 'pre-line'
+        whiteSpace: 'pre-line',
+        wordBreak: 'break-all'
     },
     gridItem: {
         marginTop: '20px',
@@ -77,7 +78,17 @@ function QuestionAnswerList(props?: StoreProps) {
         }
         getQuestions(filter)
     };
+    const withLinks = (text: string) => {
 
+        let res : any[] = []
+        
+        // @ts-ignore
+        text.replace(/((?:https?:\/\/|ftps?:\/\/|\bwww\.)(?:(?![.,?!;:()]*(?:\s|$))[^\s]){2,})|(\n+|(?:(?!(?:https?:\/\/|ftp:\/\/|\bwww\.)(?:(?![.,?!;:()]*(?:\s|$))[^\s]){2,}).)+)/gim, (m, link, text) => {
+            res.push(link ? <a href={(link[0] === "w" ? "//" : "") + link} key={res.length}>{link}</a> : text)
+        })
+
+        return <Typography>{res}</Typography>
+    }
     return (
         <ul className={classes.ulElement}>
             <InfiniteScroll
@@ -97,12 +108,11 @@ function QuestionAnswerList(props?: StoreProps) {
                             <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                                 <Typography className={classes.heading}>{item.question}</Typography>
                                 <Typography className={classes.secondaryHeading}>
-                                    <span
-                                        className={classes.textHidden}>Tags:</span> {item.tagIds.map((id) => (props?.tags?.find(p => p?.id == id)?.name?.concat(" ")))}
+                                    <span className={classes.textHidden}>Tags:</span> {item.tagIds.map((id) => (props?.tags?.find(p => p?.id == id)?.name?.concat(" ")))}
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>{item.answer}</Typography>
+                                {withLinks(item.answer)}
                             </AccordionDetails>
                         </Accordion>
                     </Grid>
